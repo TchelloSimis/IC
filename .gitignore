@@ -13,5 +13,6 @@
 
 # Editor files
 .vscode/
+!.vscode/tasks.json
 *.swp
 *~
