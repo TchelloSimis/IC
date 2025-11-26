@@ -320,21 +320,21 @@ Tendo verificado a equivalência, podemos provar algumas propriedades da base de
 \end{proposition}
 
 \begin{proof}
-    Escrevemos $S = \sum_{n=1}^\infty \frac{1}{b_n}$. Como $b_{n-1}$ divide $b_n$ para todo $n > 1$, a $n$-ésima soma parcial da série pode ser escrita como $a_n/b_n$ para algum inteiro $a_n$.
+    Escrevemos $S = \sum_{n=1}^\infty \frac{1}{b_n}$, com $b_n = (2^{n-1})^{b_{n-1}}$ para $n \ge 2$ e $b_1 = 1$. Como $b_{n-1}$ divide $b_n$ para todo $n > 1$, a $n$-ésima soma parcial da série pode ser escrita como $a_n/b_n$ para algum inteiro $a_n$.
     
     Analisando o erro da aproximação, temos:
     \[ 0 < S - \frac{a_n}{b_n} = \sum_{k=n+1}^\infty \frac{1}{b_k} < \frac{2}{b_{n+1}} \]
 
     Substituindo a definição de $b_{n+1}$, obtemos:
-    \[ \frac{2}{b_{n+1}} = \frac{2}{(2^{n+1})^{b_n}} \]
+    \[ \frac{2}{b_{n+1}} = \frac{2}{(2^n)^{b_n}} \]
     Para $n \ge 2$, temos que $2 < 2^{b_n}$, o que nos permite refinar a cota superior:
-    \[ \frac{2}{(2^{n+1})^{b_n}} < \frac{1}{(2^n)^{b_n}} \]
+    \[ \frac{2}{(2^n)^{b_n}} < \frac{1}{(2^{n-1})^{b_n}} \]
     Combinando as desigualdades, obtemos para $n \ge 2$:
-    \[ \left| S - \frac{a_n}{b_n} \right| < \frac{1}{(2^n)^{b_n}} \]
+    \[ \left| S - \frac{a_n}{b_n} \right| < \frac{1}{(2^{n-1})^{b_n}} \]
 
     Se considerarmos a definição alternativa de base de irracionalidade, estamos interessados no supremo dos valores $\beta$ tais que $|\alpha - p/q| < \beta^{-q}$ possui infinitas soluções.
     
-    Neste caso, para qualquer $B > 0$, podemos escolher um inteiro $n$ tal que $2^n > B$. A desigualdade acima mostra que $a_n/b_n$ é uma solução para $\beta = 2^n$. Como podemos fazer isso para infinitos $n$, concluímos que o conjunto de tais $\beta$ não é limitado superiormente.
+    Neste caso, para qualquer $B > 0$, podemos escolher um inteiro $n$ tal que $2^{n-1} > B$. A desigualdade acima mostra que $a_n/b_n$ é uma solução para $\beta = 2^{n-1}$. Como podemos fazer isso para infinitos $n$, concluímos que o conjunto de tais $\beta$ não é limitado superiormente.
     
     Portanto, $\mu_\mathcal{B}(S) = \infty$, e $S$ é um número super Liouville.
 \end{proof}
@@ -370,7 +370,7 @@ Também é possível encontrar uma fórmula análoga a \ref{thm:formula_medida} 
 
 \begin{theorem}
     \label{thm:formula_base}
-    Seja $\alpha$ um irracional cuja expansão em frações contínuas é $[a_0; a_1, a_2, ...]$. Então:
+    Seja $\alpha$ um irracional cuja expansão em frações contínuas é $[a_0; a_1, a_2, ...]$ com convergentes $p_n/q_n$. Então:
     \[ \ln(\mu_\mathcal{B}(\alpha)) = \limsup_{n \to \infty} \frac{\ln q_{n+1}}{q_n} = \limsup_{n \to \infty} \frac{\ln a_{n+1}}{q_n} \]
 \end{theorem}
 
@@ -445,5 +445,49 @@ Também é possível encontrar uma fórmula análoga a \ref{thm:formula_medida} 
     O que conclui a demonstração.
 \end{proof}
 
+Uma ferramenta particularmente útil para calcular a base e a medida de irracionalidade de Liouville-Roth utiliza a sequência de Fibonacci:
 
+\begin{proposition}
+    \label{prop:medidas_fibonacci}
+    Seja $\alpha$ um irracional cuja expansão em frações contínuas é $[a_0; a_1, a_2, ...]$ com convergentes $p_n/q_n$, e $F_n$ o $n$-ésimo número de Fibonacci (com $F_0 = 1, F_1 = 1, F_2 = 2$). Então:
 
+    \[ \limsup_{n \to \infty} \frac{\ln a_{n+1}}{\ln (F_{n} \cdot a_1 \cdot a_2 \cdots a_n)} \le \mu_\mathcal{L}(\alpha) - 2 \le \limsup_{n \to \infty} \frac{\ln a_{n+1}}{\ln (F_{n} + a_1 \cdot a_2 \cdots a_n)} \]
+
+    \[ \limsup_{n \to \infty} \frac{\ln a_{n+1}}{F_{n} \cdot a_1 \cdot a_2 \cdots a_n} \le \ln (\mu_\mathcal{B}(\alpha)) \le \limsup_{n \to \infty} \frac{\ln a_{n+1}}{F_{n} + a_1 \cdot a_2 \cdots a_n} \]
+
+\end{proposition}
+
+\begin{proof}
+    Para demonstrar a proposição, estabeleceremos estimativas para $q_n$ em termos dos números de Fibonacci $F_n$ e do produto dos denominadores parciais $P_n = \prod_{i=1}^n a_i$. Especificamente, provaremos que:
+    \begin{equation}
+        \label{eq:estimativas_fibonacci}
+        F_n + P_n - 1 \le q_n \le F_n P_n
+    \end{equation}
+    
+    Uma vez estabelecidas essas desigualdades, o resultado segue diretamente ao substituí-las nas fórmulas \ref{thm:formula_medida} e \ref{thm:formula_base}, observando que tanto $F_n$ quanto $P_n$ tendem ao infinito.
+
+    Lembrando da relação de recorrência \eqref{eq:recorrencia_convergentes} e tomando $q_0 = 1$, primeiro provamos por indução que $q_n$ é a soma de exatamente $F_n$ termos algébricos distintos, onde cada termo é um produto de um subconjunto dos denominadores parciais $\{a_1, \dots, a_n\}$.
+    
+    Para os casos base $n=1$ e $n=2$:
+    \begin{align*}
+        q_1 &= a_1 \quad (1 = F_1 \text{ termo}) \\
+        q_2 &= a_2 q_1 + q_0 = a_2 a_1 + 1 \quad (2 = F_2 \text{ termos})
+    \end{align*}
+
+    Assumindo que $q_k$ possui $F_k$ termos e $q_{k-1}$ possui $F_{k-1}$ termos, analisamos a recorrência:
+    \[ q_{k+1} = \underbrace{a_{k+1}q_k}_{\text{Termos contendo } a_{k+1}} + \underbrace{q_{k-1}}_{\text{Termos sem } a_{k+1}} \]
+    
+    Como os conjuntos de termos são disjuntos (pela presença ou ausência de $a_{k+1}$), o número total de termos é $F_k + F_{k-1} = F_{k+1}$.
+    
+    Seja $T_n$ o conjunto de termos na expansão de $q_n$. Observamos que:
+    1. O termo $P_n = \prod_{i=1}^n a_i$ está sempre presente (por indução: $P_{k+1} = a_{k+1} P_k$).
+    2. Como $a_i \ge 1$, para todo termo $t \in T_n$, vale $1 \le t \le P_n$.
+
+    Utilizando essas propriedades, derivamos as cotas. Para a cota superior, somamos o valor máximo de todos os $F_n$ termos:
+    \[ q_n = \sum_{t \in T_n} t \le \sum_{t \in T_n} P_n = F_n P_n \]
+    
+    Para a cota inferior, isolamos o termo $P_n$ e usamos o valor mínimo ($1$) para os $F_n - 1$ termos restantes:
+    \[ q_n = P_n + \sum_{t \in T_n \setminus \{P_n\}} t \ge P_n + \sum_{t \in T_n \setminus \{P_n\}} 1 = P_n + (F_n - 1) \]
+    
+    Combinando as desigualdades, obtemos o resultado apresentado em \eqref{eq:estimativas_fibonacci}, provando a proposição.
+\end{proof}
