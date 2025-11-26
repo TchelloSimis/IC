@@ -1,0 +1,471 @@
+\section{Aproximação por Racionais e Medida de Irracionalidade}
+
+\begin{definition}
+\label{def:ordem_aproximacao}
+    Um número real $\alpha$ é dito ser aproximado por racionais por ordem $\mu$ se existe uma constante $k(\alpha)$, possivelmente dependendo de $\alpha$, tal que a inequação
+    \[ \left\lvert \alpha - \frac{p}{q} \right\rvert  < \frac{k(\alpha)}{q^\mu}\]
+    possui infinitas soluções com $p$ e $q$ primos entre si e $q > 0$. 
+\end{definition}
+
+É importante notar que essa definição implica, como esperamos para qualquer aproximação, que qualquer sequência $\left\{ \frac{p_n}{q_n} \right\} _{n \in \mathbb{N}}$ que a satisfaça necessariamente converge para $\alpha$, uma vez que, para infinitos racionais distintos, é necessário que $|p_n| \rightarrow \infty$ ou $q_n \rightarrow \infty$. Todavia, se apenas $|p_n| \rightarrow \infty$, a inequação não terá infinitas soluções, pois neste caso $\left| \alpha - \frac{p_n}{q_n} \right| \rightarrow \infty \Rightarrow \exists n_0 \in \mathbb{N} \text{ tal que } \left| \alpha - \frac{p_{n_0}}{q_{n_0}} \right| \geq \frac{k(\alpha)}{q_{n_0}^\mu}$. Logo, $q_n \rightarrow \infty$ e, por consequência, $\left| \alpha - \frac{p_n}{q_n} \right| \rightarrow 0$.
+
+\begin{definition}
+\label{def:medida_irracionalidade}
+    A medida de irracionalidade de Liouville-Roth (ou expoente de irracionalidade) de um número real $\alpha$ é definida como:
+    \[\mu_{\mathcal{L}} (\alpha) = \sup \left\{ \mu : \left\lvert \alpha - \frac{p}{q} \right\rvert  < \frac{1}{q^\mu}  \text{ tem infinitas soluções com $p$ e $q$ primos entre si e } q>0\right\} \]
+\end{definition}
+
+Observe que o conjunto cujo supremo é o expoente de irracionalidade é necessariamente um intervalo, pois $\forall \mu_1, \mu_2 \text{ tais que } 0 \leq \mu_1 < \mu_2 \text{ , temos que } \frac{1}{q^{\mu_1}} > \frac{1}{q^{\mu_2}}$ e, portanto, se $\mu_2$ fornece infinitas soluções, as mesmas soluções funcionarão para qualquer número real no intervalo $[0 ,\mu_2]$.
+
+É evidente a relação entre as definições: a medida de irracionalidade de um número real é necessariamente menor ou igual à maior ordem pela qual este número pode ser aproximado. Além disso, a medida de irracionalidade está diretamente relacionada com a facilidade de aproximar um número real por racionais distintos — quanto maior a medida, \enquote{melhores} as aproximações. 
+
+A princípio, essa ideia dá a entender que a medida de irracionalidade de um número racional seria infinita, uma vez que um racional pode ser perfeitamente aproximado por números racionais. No entanto, é necessário notar que a definição exige que os racionais que aproximam o número em questão sejam distintos entre si - e aproximar um racional por racionais distintos não é tão eficiente. Disso, decorre a seguinte proposição: 
+
+\begin{proposition}
+\label{thm:medida_racionais}
+    O expoente de irracionalidade de um número racional $\frac{a}{b}$ é igual a 1. 
+\end{proposition}
+
+\begin{dem}
+    Vamos dividir essa demonstração em duas partes: primeiro, provaremos que a medida de irracionalidade de $\frac{a}{b}$ é $\geq 1$. Em seguida, provaremos que a medida de irracionalidade é $\leq 1$, e, por consequência, tal medida deve ser exatamente igual a 1. Ademais, assumiremos sem perda de generalidade que $b > 0$ e que $a$ e $b$ são primos entre si. 
+
+    Para a primeira parte, considere a sequência de racionais $\left\{ \frac{p_n}{q_n}\right\}_{n \in \mathbb{N}\backslash\{0, 1\}}$ , definida da seguinte forma:
+    \[\left\{\begin{matrix}
+    p_n = n\cdot a - 1
+    \\ q_n = n\cdot b
+    \end{matrix}\right.\]
+
+    Note que
+
+    \[\left| \frac{a}{b} - \frac{p_n}{q_n}\right| =\left| \frac{a}{b} - \frac{n\cdot a - 1}{n\cdot b}\right| = \left| \frac{a\cdot( n\cdot b) - (n\cdot a +1)\cdot b }{n\cdot b^2}\right| = \left| \frac{b}{n\cdot b^2}\right| \]
+
+    Como $b>0$, temos: 
+
+    \[\left| \frac{a}{b} - \frac{p_n}{q_n}\right| = \frac{b}{n\cdot b^2} = \frac{1}{n\cdot b} = \frac{1}{q_n}\]
+
+Ora, como $q_n>1$ (pois $n>1$), então $\forall \varepsilon \in (0, 1)$ vale que 
+
+\[q_ n > {q_n}^\varepsilon \Rightarrow\frac{1}{q_n} < \frac{1}{{q_n}^{\varepsilon}} \Rightarrow \left| \frac{a}{b} - \frac{p_n}{q_n}\right| < \frac{1}{{q_n}^\varepsilon}\]
+
+Observe que, mesmo que $p_n$ e $q_n$ não sejam primos entre si, i.e., se existir $\frac{p'_n}{q'_n} = \frac{p_n}{q_n}$ com $q'_n < q_n$, teremos que $\frac{1}{q'_n} > \frac{1}{q_n}$ e, portanto, 
+
+Ora, mas segue da definição \ref{def:ordem_aproximacao} que $q \rightarrow\infty$. Portanto, chegamos em uma contradição ($q^{\mu - 1} \rightarrow \infty$ e $q^{\mu - 1} < b$, ou seja, há apenas uma quantidade finita de soluções se o expoente é maior que 1), e $\mu \leq 1$. Dessa forma, $\mu = 1$.
+\end{dem}
+
+A seguir, demonstramos também algumas propriedades fundamentais dessa medida de irracionalidade:
+
+\begin{proposition}
+\label{thm:translacao_medida}
+    Se $x$ pode ser aproximado por racionais por ordem $\mu$, então $\forall m\in \mathbb{Z}$, vale o mesmo para $x+m$.
+\end{proposition}
+
+\begin{dem}
+    Ora, se $x$ é aproximado por racionais por ordem $\mu$, então existe uma constante $k(x)$ e uma sequência com infinitos elementos distintos $\left(\frac{p_n}{q_n}\right)_{n\in\mathbb{N}}$ tal que 
+    
+    \[\left|x - \frac{p_n}{q_n}\right|<\frac{k(x)}{{q_n}^{\mu}}\]
+    
+    para todo $n\in\mathbb{N}$. Trivialmente, temos que
+
+    \[\left|(x + m)- \frac{p_n+(m\cdot q_n)}{q_n}\right|<\frac{k(x)}{{q_n}^{\mu}}\]
+
+    Dessa forma, mesmo que  $p_n+(m\cdot q_n)$ e $q_n$ não sejam primos entre si, basta tomar a forma simplificada $\frac{p'_n}{q'_n}$, com $q'_n < q_n$, e teremos $\left| (x + m) - \frac{p'_n}{q'_n} \right| <\frac{k(x)}{{q_n}^\mu} < \frac{k(x)}{{q'_n}^\mu}$. Ademais, a sequência $\left(\frac{p_n+(m\cdot q_n)}{q_n}\right)_{n\in\mathbb{N}}$ possui infinitos elementos distintos, uma vez que $\frac{p_a}{q_a}\neq \frac{p_b}{q_b} \Rightarrow \frac{p_a+m\cdot q_a}{q_a} \neq \frac{p_b+m\cdot q_b}{q_b}$.
+    Isso significa que $x+m$ pode ser aproximado por racionais por ordem $\mu$.
+\end{dem}
+
+
+\begin{proposition}
+\label{thm:ordem_implica_medida}
+    Se $\alpha$ pode ser aproximado por racionais por ordem $\mu$, então $\mu_\mathcal{L}(\alpha) \ge \mu$.
+\end{proposition}
+
+\begin{dem}
+    Queremos provar que, se $\left| \alpha - p/q \right| < k({\alpha})/{q^\mu}$ tem infinitas soluções racionais distintas com $q >0$, então para qualquer $\nu < \mu$, a inequação $\left| \alpha - p/q \right| < 1/{q^\nu}$ também terá. 
+    
+    Seja então $\varepsilon > 0$. Mostraremos que a desigualdade 
+
+    \begin{equation}
+    \label{eq:prop_ordem_medida_1}
+        \left| \alpha - \frac{p}{q} \right| < \frac{1}{q^{\mu-\varepsilon}}
+    \end{equation}
+    
+    %
+    possui infinitas soluções. Seja $(p_k, q_k)_{k \in \mathbb{N}}$ uma sequência arbitrária de soluções distintas para 
+
+    \begin{equation}
+    \label{eq:prop_ordem_medida_2}
+        \left| \alpha - \frac{p_k}{q_k} \right| < \frac{1}{q_k^{\mu}}
+    \end{equation}
+    
+    Note que a desigualdade \eqref{eq:prop_ordem_medida_2} implicará \eqref{eq:prop_ordem_medida_1} se 
+
+    \[\frac{k(\alpha)}{q_k^\mu} \le \frac{1}{q_k^{r-\varepsilon}} \iff c \le \frac{q_k^\mu}{q_k^{\mu-\varepsilon}} \iff c \le q_k^\varepsilon\]
+
+    Como $q_k \rightarrow \infty$, para todo $\epsilon > 0$ existe uma subsequência de $(p_k, q_k)_{k \in \mathbb{N}}$ que satisfaz \eqref{eq:prop_ordem_medida_1}. Logo, para todo $\nu <\mu$, $\left| \alpha - p/q \right| < 1/{q^\nu}$ tem infinitas soluções distintas, e 
+    
+    \[\sup \left\{ \nu : \left\lvert \alpha - \frac{p}{q} \right\rvert  < \frac{1}{q^\nu}  \text{ tem infinitas soluções com $p$ e $q$ primos entre si e } q>0\right\} \ge \mu\]
+    
+\end{dem}
+
+\begin{theorem} [Teorema da aproximação de Dirichlet]
+\label{thm:dirichlet}
+    O expoente de irracionalidade de um número irracional $\alpha$ é maior ou igual a 2. 
+\end{theorem}
+
+\begin{dem}
+    Seja $\alpha$ irracional e $N$ natural. Ora, então para cada $k = 0, 1, ..., N$ podemos escrever $k \cdot \alpha = m_k + x_k$, com $m_k$ inteiro e $x_k \in [0, 1)$. Ao mesmo tempo, é possível dividir $[0, 1)$ em $N$ intervalos de tamanho $\frac{1}{N}$
+
+    Note que, como $\alpha$ é irracional, temos $N+1$ números $x_0, x_1, ..., x_N$, todos distintos. Isso decorre do fato que, se $\alpha$ é irracional, então não existem $(a, b) \in \mathbb{N^*} \times\mathbb{N}$ tais que $a\cdot\alpha-b \in \mathbb{N}$ (se existissem, então existiriam $(a, b, c) \in \mathbb{N^*} \times \mathbb{N} \times \mathbb{N}$ tais que $\alpha = \frac{c+b}{a}$, e $\alpha$ seria racional).
+    
+    Ao mesmo tempo, temos também $N$ intervalos de tamanho $\frac{1}{N}$. É evidente, portanto, que pelo menos dois destes números estão em um único intervalo, isto é, $\exists i \hspace{0.1cm} \exists j \hspace{0.1cm}  (0 \leq i < j \leq N)$ tais que
+    $$ | x_j - x_i | < \frac{1}{N}$$
+
+    Voltando à definição de cada $x_k$, temos:
+    \[x_k = k \cdot \alpha - m_k \Rightarrow |(j\cdot \alpha - m_j) - (i\cdot \alpha - m_i)| < \frac{1}{N} \text{ , com $m_i$ e $m_j$ inteiros}\]
+
+    Reescrevemos a expressão anterior: 
+    \[|(j-i)\cdot \alpha - (m_j - m_i)| < \frac{1}{N} \Rightarrow \left\lvert \alpha - \frac{m_j - m_i}{j - i} \right\rvert < \frac{1}{(j-i)\cdot N}\]
+
+    Note que, por definição, $i < j \leq N$ e, portanto, $0< (j-i) \leq N$. Logo, 
+    \[\left\lvert \alpha - \frac{m_j - m_i}{j - i} \right\rvert < \frac{1}{(j-i)^2}\]
+
+    Resta, todavia, provar que temos infinitas soluções distintas. Ora, como $\alpha \notin \mathbb{Q}$, então 
+
+    \[\left| \alpha - \frac{m_j - m_i}{j - i} \right| = x > 0\]
+
+    Ao mesmo tempo, 
+
+    \[\left| \alpha - \frac{m_j - m_i}{j - i} \right| = x < \frac{1}{(j-i)\cdot N}\]
+
+    Como $N$ é arbitrário, e pode ser escolhido tão grande quanto se queira, temos que $\frac{1}{(j-i)\cdot N} \rightarrow 0$. Ora, então se existirem finitas soluções, podemos tomar $x_0$ como o menor módulo da diferença entre as soluções e $\alpha$. Teríamos: 
+
+    \[\left\{\begin{matrix}
+    x_0 > 0 
+    \\ x_0 < \frac{1}{(j-i)\cdot N} \forall N
+    \end{matrix}\right.\]
+
+    Que, evidentemente, é uma contradição. 
+
+    Conseguimos, portanto, infinitos racionais de forma $\frac{m_j - m_i}{j - i}$ (bastando variar $N$ para variar os racionais) que satisfazem à condição para que o número 2 pertença ao conjunto cujo supremo é a medida de irracionalidade.
+\end{dem}
+
+\begin{theorem}[Teorema de Liouville]
+\label{thm:liouville}
+    Seja x um número algébrico de grau $n$. Então x pode ser aproximado por racionais por ordem no máximo n. 
+\end{theorem}
+
+\begin{dem}
+    Seja $x$ um algébrico irracional, e $f(X) = a_n\cdot X^n + \dots + a_1 \cdot X + a_0 $ o polinômio minimal (i.e., com coeficientes inteiros e de menor grau) que satisfaz $f(x) = 0$. Ora, por definição, $f$ é irredutível sobre $\mathbb{Z}$ e, por consequência, irredutível sobre $\mathbb{Q}$. Em particular, se $f$ é irredutível sobre $\mathbb{Q}$, então $f$ não possui raízes racionais (uma vez que, se possuísse uma raiz racional $\frac{a}{b}$, seria divisível por $X - \frac{a}{b}$)
+
+    Sejam agora 
+    $$M = \sup\limits_{|z - x|<1}\{|f'(z)|\} \text{ , e } \frac{p}{q} \text{ um racional tal que } \left\lvert x - \frac{p}{q} \right\rvert < 1 \text{ com } q >0 $$
+
+    O Teorema do Valor Médio nos garante que existe $c$ entre $x$ e $\frac{p}{q}$ tal que 
+
+    \[\left\lvert \frac{f\left(\frac{p}{q}\right) - f(x)}{\frac{p}{q}-x} \right\rvert = |f'(c)| \Rightarrow \left\lvert {f\left(\frac{p}{q}\right) - f(x)} \right\rvert = \left|f'(c)\left({x-\frac{p}{q}}\right)\right| \]
+
+    Note que $|c - x| < 1 $ e, portanto, $ |f'(c)| < M$. Logo, 
+    \begin{equation}
+        \left\lvert {f\left(\frac{p}{q}\right) - f(x)} \right\rvert \leq M\cdot \left|{x-\frac{p}{q}}\right| \text{, sempre que } \frac{p}{q} \in (x-1, x+1)
+    \end{equation}
+    
+
+    Todavia, sabemos que $f$ não possui raízes racionais. Temos:
+
+    \[f\left(\frac{p}{q}\right) = a_n \left(\frac{p}{q}\right)^n + \dots + a_0 = \frac{a_n \cdot p^n + \dots + a_1 \cdot p\cdot q ^{n-1}+a_0\cdot q^n}{q^n}\neq 0 \Rightarrow\]
+    \[\Rightarrow a_n \cdot p^n + \dots + a_1 \cdot p\cdot q ^{n-1}+a_0\cdot q^n \in \mathbb{Z} \backslash \{ 0\}\]
+
+    Ao mesmo tempo, $f(x) = 0$ por definição. Logo, 
+
+    \begin{equation}
+      \left|f\left(\frac{p}{q}\right) - f(x) \right| = \left|f\left(\frac{p}{q}\right)\right| = \frac{\left|a_n\cdot p^n + ... + a_1\cdot p \cdot q^{n-1}+a_0\cdot q^n\right|}{q^n}\geq \frac{1}{q^n}  
+    \end{equation}
+
+    Combinando (1) e (2), temos:
+    \begin{equation}
+    M \cdot \left| x - \frac{p}{q} \right| \geq \frac{1}{q^n} \Rightarrow \left| x - \frac{p}{q} \right| \geq \frac{1}{M \cdot q^n}
+    \end{equation}
+
+    Isso é o suficiente para provar que $x$ pode ser aproximado por racionais por ordem, no máximo $n$, pois, supondo que não o fosse, teríamos uma sequência infinita $\left\{ \frac{p_i}{q_i} \right\}_{i \geq 1}$ e uma constante $k(x)$ tais que 
+
+    \[\left|x-\frac{p_i}{q_i}\right|<\frac{k(x)}{q_i^{n+\varepsilon}}\text{, com $\varepsilon > 0$}\]
+
+    Ora, a sequência $\left\{ \frac{p_i}{q_i} \right\}_{i \geq 1}$ deve convergir a $x$ por definição. Podemos, portanto, tomar $\frac{p_i}{q_i}$ como contida no intervalo $(x-1, x+1)$. Dessa forma, $\frac{p_i}{q_i}$ satisfaz às condições de (1), e vale o resultado de (3): 
+
+    \[\frac{1}{q_i^n} \leq M \cdot \left| x - \frac{p_i}{q_i}\right| \Rightarrow \frac{1}{M \cdot q_i^n} \leq\left| x - \frac{p_i}{q_i}\right| \]
+
+    Combinando estas duas últimas inequações, temos:
+
+    \[\frac{1}{M \cdot q_i^n} < \frac{k(x)}{q_i^{n+\varepsilon}} \Rightarrow \frac{1}{k(x) \cdot M \cdot q_i^n} < \frac{1}{q_i^{n+\varepsilon}} \Rightarrow \frac{1}{k(x)\cdot M} < \frac{1}{q_i^\varepsilon} \Rightarrow q_i^\varepsilon < k(x) \cdot M\]
+
+    Ora, mas $q_i \rightarrow \infty$ por consequência da definição \ref{def:ordem_aproximacao}. Temos, portanto, uma contradição: existe $A$ fixo tal que $q_i < A$ para todo $i$, mas $q_i$ tende ao infinito. Por conta disso, $x$ deve ser aproximado por racionais a grau, no máximo, $n$.
+\end{dem}
+
+Uma aplicação particularmente interessante do Teorema \ref{thm:liouville} decorre de notar que, se um número é algébrico, então a maior ordem pela qual ele pode ser aproximado por racionais é finita. Se conseguirmos encontrar um número que pode ser aproximado por racionais a uma ordem tão grande quanto se queira, portanto, este número é necessariamente transcendental. 
+
+\subsection{Construindo números transcendentais}
+\begin{definition}
+\label{def:medida_infinita}
+    Se, para todo $n \in \mathbb{N}$ arbitrariamente grande, a inequação $0<\left| \alpha - \frac{p}{q} \right|  < \frac{k(\alpha)}{q^n}$ possui uma solução, dizemos que $\alpha$ é aproximado por racionais por ordem infinita. Se $k(\alpha) = 1$, então temos que $\mu_\mathcal{L}(\alpha) = \infty.$ (Note: esta definição é equivalente a dizer que há infinitas soluções para cada $n$, pois quando $n \rightarrow \infty$,  $\frac{k(\alpha)}{q^n} \rightarrow 0$, mas $0<\left| \alpha - \frac{p}{q} \right|$, resultando em infinitas soluções de forma $\frac{p}{q}$). 
+\end{definition}
+
+Motivados pelo Teorema \ref{thm:liouville} e também pela definição \ref{def:medida_infinita}, nosso objetivo agora é encontrar um número real que seja aproximado por racionais por ordem infinita, garantindo portanto que este seja transcendental. 
+
+Considere a série 
+
+\[\sum_{m=1}^\infty \frac{1}{10^{m!}}\]
+
+É evidente que a série é convergente, pois $\frac{1}{10^m} \geq \frac{1}{10^{m!}} \hspace{0.1cm} \forall \hspace{0.1cm} m \in \mathbb{N}$. Seja, portanto, $x = \displaystyle\sum_{m=1}^\infty \frac{1}{10^{m!}}$. Seja $N \in \mathbb{N}$ fixado e $n > N$. Definimos:
+
+\[\frac{p_n}{q_n} = \sum_{m=1}^n \frac{1}{10^{m!}} \text{, com $p_n, q_n >0$ e primos entre si.}\]
+
+Note que $q_n$ deve dividir $10^{n!}$, pois
+
+\[\frac{p_n}{q_n} = \frac{1}{10^{1!}} + \frac{1}{10^{2!}}\dots + \frac{1}{10^{n!}} = \frac{10^{n!-1!}}{10^{n!}}+\frac{10^{n!-2!}}{10^{n!}}+\dots\frac{1}{10^{n!}} \Rightarrow\]
+\[\Rightarrow \exists K \in \mathbb{N} \text{ tal que } \frac{p_n}{q_n} = \frac{K}{10^{n!}}\]
+
+Como $p_n, q_n$ são primos entre si, $q_n$ deve dividir $10^{n!}$ e, portanto, 
+\begin{equation}
+    q_n \leq 10^{n!}
+\end{equation}
+
+Além disso, $\left\{ \frac{p_n}{q_n} \right\}$ converge monotonicamente em direção a $x$. Logo, temos:
+
+\[0 < x - \frac{p_n}{q_n} = \sum_{m>n}^\infty \frac{1}{10^{m!}} = \frac{1}{10^{(n+1)!}} \left( 1 + \frac{1}{10^{n+2}} + \frac{1}{10^{(n+2)(n+3)}} + \dots\right)\]
+
+Note que
+
+\[1 + \frac{1}{10^{n+2}} + \frac{1}{10^{(n+2)(n+3)}} + \dots < 1 + \frac{1}{10^1}+\frac{1}{10^2}+\dots<2\]
+
+Logo, 
+
+\[x - \frac{p_n}{q_n} < \frac{2}{\left(10^{n!}\right)^{n+1}}\]
+
+Usando (4), temos, portanto, que
+
+\[0 < x - \frac{p_n}{q_n}<\frac{2}{q_n^{n+1}}<\frac{2}{q_n^N}\]
+
+Como $N$ pode ser escolhido arbitrariamente grande, $x$ pode ser aproximado por racionais a uma ordem tão grande quanto se queira, uma vez que $i \neq j \Rightarrow \frac{p_i}{q_i} \neq \frac{p_j}{q_j}$ por definição. Por consequência do Teorema \ref{thm:liouville}, $x$ é transcendental.
+
+Considere agora a seguinte família de funções: 
+\begin{align*}
+d_n: \mathbb{R} & \longrightarrow \mathbb{N}\\
+x&\longmapsto \text{n-ésimo dígito decimal de } x
+\end{align*}
+
+Por exemplo: $d_1(\pi) = 1$, $d_2(\pi) = 4$ e assim sucessivamente. É evidente que 
+    \[d_n(x) \leq 9 \hspace{0.1cm} \forall \hspace{0.1cm} x \in \mathbb{R} \hspace{0.1cm} \forall \hspace{0.1cm} n \in \mathbb{N}\]
+
+Dessa forma, dado um número real $x$, considere a seguinte série:
+
+\[\sum_{m=1}^\infty \frac{d_m(x)}{10^{m!}}\]
+
+É evidente que trata-se de uma série convergente, pois $d_m(x) \leq 9$, e a série $\sum_{m=1}^\infty \frac{1}{10^{m!}}$ é convergente. Seja, então, 
+
+\[L_x = \sum_{m=1}^\infty \frac{d_m(x)}{10^{m!}}\]
+
+Note que podemos repetir a mesma demonstração que prova que $x$ é transcendental, apenas alterando a constante:
+
+\[0 < L_x - \frac{p'_n}{q'_n} \leq \sum_{m>n}^\infty \frac{9}{10^{m!}} = \frac{9}{10^{(n+1)!}} \left( 1 + \frac{1}{10^{n+2}} + \frac{1}{10^{(n+2)(n+3)}} + \dots\right) \Rightarrow\]
+\[\Rightarrow L_x - \frac{p'_n}{q'_n} < \frac{18}{\left(10^{n!}\right)^{n+1}} \]
+
+E, concluindo da mesma forma, 
+
+\[0 < L_x - \frac{p'_n}{q'_n}<\frac{18}{{q'_n}^{n+1}}<\frac{18}{{q'_n}^{N}}\]
+
+O que significa que $L_x$ também é transcendental, pois pode ser aproximado por racionais a uma ordem tão grande quanto se queira. No caso de uma representação decimal finita para $x$, basta escolher sua representação decimal infinita — ou seja, no lugar de $0,3$, usamos $0,2999\dots$
+
+Além disso, podemos somar a parte inteira de $x$ a $L_x$, e o número continuará sendo transcendental. Podemos, portanto, notar uma clara bijeção entre o conjunto dos números reais e esse conjunto de números transcendentais, que formam um subconjunto dos chamados Números de Liouville. O número associado a $\pi$, por exemplo, seria $3.140001000000000000000005\dots$, com o próximo digito de $\pi$ ocorrendo após  $5! - 4! -1$ zeros. 
+
+Mais que isso, é possível provar que esses números possuem expoente de irracionalidade infinito, i.e., para $N$ arbitrariamente grande, $\left| L_x - \frac{p}{q} \right| < \frac{1}{q^N}$ possui infinitas soluções com $p, q$ primos entre si. Isso decorre de generalizar a forma destes números para qualquer base $b$: 
+
+\begin{theorem}
+\label{thm:medida_infinita}
+    Dado $b \geq 2$, qualquer número de forma $\displaystyle\sum_{k=1}^\infty \frac{a_k}{b^{k!}}$, onde $a_k \in \{0, 1, ..., b-1\}\forall k$, com $\left(a_k\right)_{k\in\mathbb{N}}$ eventualmente não-nula (i.e., $\exists K$ tal que $\forall k'\geq K$, $a_{k'}\neq 0$), possui expoente de irracionalidade infinito.  
+\end{theorem}
+
+\begin{dem}
+    Note que todas as séries de forma $\displaystyle\sum_{k=1}^\infty \frac{a_k}{b^{k!}}$ serão convergentes com as condições impostas pelo teorema, pois serão dominadas pela série $\displaystyle\sum_{k=1}^\infty\frac{b-1}{b^k} = (b-1)\cdot\displaystyle\sum_{k=1}^\infty\frac{1}{b^k}$. 
+    
+    Considere agora, com $n\geq1$, a sequência $\frac{p_n}{q_n}$, na qual 
+    
+       \[ \left\{\begin{matrix}
+        q_n = b^{n!}\\p_n = b^{n!} \cdot \displaystyle\sum_{k=1}^n \frac{a_k}{b^{k!}} =  \displaystyle\sum_{k=1}^n a_k\cdot b^{n! - k!}
+        \end{matrix}\right.\]
+
+    Note que $\frac{p_n}{q_n} = \displaystyle\sum_{k=1}^n \frac{a_k}{b^{k!}}$. Ora, então se $x = \displaystyle\sum_{k=1}^\infty \frac{a_k}{b^{k!}}$, temos: 
+
+    \[0 < x - \frac{p_n}{q_n} = x - \sum_{k=1}^n \frac{a_k}{b^{k!}} = \sum_{k=1}^\infty \frac{a_k}{b^{k!}} - \sum_{k=1}^n \frac{a_k}{b^{k!}} = \sum_{k=n+1}^\infty \frac{a_k}{b^{k!}} \leq \sum_{k=n+1}^\infty \frac{b-1}{b^{k!}} < \sum_{k=(n+1)!}^\infty \frac{b-1}{b^k} =\]
+
+    \[= \frac{b-1}{b^{(n+1)!}} + \frac{b-1}{b^{(n+1)!+1}}+\dots=\frac{b-1}{b^{(n+1)!}b^0}+\frac{b-1}{b^{(n+1)!}b^1}+\dots =\] 
+    \[ = \frac{b-1}{b^{(n+1)!}} \cdot \sum_{k=0}^\infty \frac{1}{b^k} = \frac{b-1}{b^{(n+1)!}}\cdot \frac{b}{b-1}=\frac{b}{b^{(n+1)!}} \leq\]
+
+    \[\leq \frac{b^{n!}}{b^{(n+1)!}} =\frac{1}{b^{(n+1)!-n!}}= \frac{1}{b^{(n+1)\cdot n!-n!}} = \frac{1}{b^{n\cdot n!+n!-n!}} = \frac{1}{b^{n\cdot n!}} = \frac{1}{(b^{n!})^n} = \frac{1}{{q_n}^n}\]
+
+    Ora, então para qualquer $n\in \mathbb{N}$, encontramos infinitos racionais distintos e com denominador e numerador primos entre si, e $\mu_\mathcal{L}(x) = \infty$
+    
+    Note que só podemos garantir $x - \frac{p_n}{q_n} \neq 0$ e que $\left(\frac{p_n}{q_n}\right)_{n\in\mathbb{N}}$ possui infinitos elementos distintos se $(a_n)_{n\in\mathbb{N}}$ não for eventualmente zero, e, por isso, é necessário usar o \enquote{truque} da representação decimal infinita descrito na construção acima.
+\end{dem}
+
+Como consequência dos Teoremas \ref{thm:translacao_medida} e \ref{thm:medida_infinita}, notamos que os números descritos na construção feita no início desta subseção são todos transcendentais e, mais que isso, possuem medida de irracionalidade de Liouville-Roth infinita. Essa segunda propriedade nos revela uma propriedade ainda mais surpreendente deste conjunto de números: sua medida de Lebesgue é igual zero. 
+
+Evidentemente, não pretendemos realizar uma explicação detalhada de teoria da medida. De maneira geral, quando tratamos de subconjuntos dos números reais, a medida de Lebesgue busca quantificar seu comprimento: os intervalos $[0, 1]$ e $(0, 1)$ possuem medida igual a 1, por exemplo, mesmo contendo o mesmo número de elementos (i.e., cardinalidade) de $\mathbb{R}$, enquanto pontos \enquote{isolados} (i.e., elementos de $\{\{x\} : x \in \mathbb{R}\}$) possuem medida zero. Ademais, qualquer união enumerável de conjuntos de medida de Lebesgue zero possui, também, medida zero — qualquer subconjunto enumerável de $\mathbb{R}$, portanto, possui medida zero. Por fim, algumas propriedades intuitivas são verdadeiras: a medida de Lebesgue é $\geq 0$ para qualquer subconjunto mensurável de $\mathbb{R}$; e, se $B$ tem medida de Lebesgue zero, todo subconjunto $A \subset B$ também tem medida de Lebesgue zero. Nem todo conjunto é mensurável — todavia, isso foge ao assunto deste trabalho. 
+
+Para provar que o conjunto dos números construídos nesta subseção têm medida de Lebesgue zero, é interessante considerar um conjunto ainda maior: o de todos os números reais com medida de irracionalidade infinita. Isso motiva a seguinte definição: 
+
+\begin{definition}
+\label{def:numeros_liouville}
+    O conjunto dos números de Liouville, $\mathcal{L}$, é definido da seguinte forma:
+    $$\mathcal{L} = \left\{ x \in \mathbb{R} : \mu_\mathcal{L}(x) = \infty \right\}$$
+\end{definition}
+
+Desta forma, se provarmos que $\mathcal{L}$ possui medida de Lebesgue zero, o conjunto dos números que construímos também terá. 
+
+Precisamos, ainda, de uma uma ferramenta para provar que medida de Lebesgue de um conjunto é zero. Por mais que a construção de tal medida em geral seja complexa, as propriedades descritas acima levam, de certa forma, à intuição de que, se conseguirmos cobrir um conjunto com uma união enumerável de intervalos cuja soma dos comprimentos seja tão pequeno quanto se queira, então esse conjunto terá medida de Lebesgue zero. Formalizando essa ideia, temos a seguinte proposição: 
+
+\begin{proposition}
+\label{prop:medida_zero_condicao}
+    Um conjunto $A$ tem medida de Lebesgue zero se $\forall \varepsilon>0$ existe uma coleção de intervalos abertos $\{I_n \subset \mathbb{R}:n\in \mathbb{N}\}$ tal que
+    \[A \subset \bigcup_{i=1}^\infty I_i \text{ , e } \sum_{i=1}^\infty \ell(I_i) < \varepsilon\]
+    com $\ell(I_i)$ denotando o comprimento de cada intervalo - i.e., $\ell((a, b)) = b-a$.
+\end{proposition}
+
+A demonstração dessa proposição pode ser facilmente encontrada em livros de análise real ou mesmo de cálculo, mas foge ao tema deste trabalho. Dessa forma, o leitor pode tomá-la como uma definição. Com isso, podemos provar o seguinte teorema:
+
+\begin{theorem}
+\label{thm:medida_zero}
+    A medida de Lebesgue de $\mathcal{L}$, $\ell(\mathcal{L})$, é igual a zero. 
+\end{theorem}
+
+\begin{dem}
+    Considere a seguinte família de conjuntos, com $(p, q, n)\in \mathbb{Z}\times\mathbb{N}\backslash\{0, 1\}\times\mathbb{N}\backslash\{0, 1,2\}$:
+    \[V_{n,q} = \bigcup_{p \in \mathbb{Z}} \left(\frac{p}{q}-\frac{1}{q^n}, \frac{p}{q}+\frac{1}{q^n}\right)\]
+
+    Note que, por definição, todo Número de Liouville $L$,= pertence a $ \left(\frac{p}{q}-\frac{1}{q^n}, \frac{p}{q}+\frac{1}{q^n}\right)$ para algum $\frac{p}{q}$ para todo $n$. Logo, para todo $n$, 
+
+    \[\mathcal{L} \subset \bigcup_{q = 2}^\infty V_{n, q}\]
+
+    Consideremos, agora, os conjuntos de elementos $L$ de $\mathcal{L}$  tais que $|L| < m$ para algum $m\in \mathbb{N}$. Cada conjunto desses poderá ser descrito por
+
+    \[\mathcal{L} \cap (-m, m) \subset\bigcup_{q = 2}^\infty V_{n, q} \cap (-m, m)\]
+
+    Voltando à definição de $V_{n,q}$, obtemos:
+    
+    \[\bigcup_{q = 2}^\infty V_{n, q} \cap (-m, m) = \bigcup_{q = 2}^\infty \bigcup_{p \in \mathbb{Z}} \left(\frac{p}{q}-\frac{1}{q^n}, \frac{p}{q}+\frac{1}{q^n}\right) \cap (-m, m) \subset \bigcup_{q = 2}^\infty \bigcup_{p = - m \cdot q}^{m \cdot q} \left(\frac{p}{q}-\frac{1}{q^n}, \frac{p}{q}+\frac{1}{q^n}\right) \]
+
+    % Note agora que cada intervalo $\left(\frac{p}{q}-\frac{1}{q^n}, \frac{p}{q}+\frac{1}{q^n}\right)$ pode ter comprimento arbitrariamente pequeno, pois, $\forall \varepsilon>0$, 
+
+    % $$ n> \log_q\left(\frac{2}{\varepsilon}\right) \Rightarrow \left(\frac{p}{q}+\frac{1}{q^n}\right) - \left(\frac{p}{q}-\frac{1}{q^n}\right) = \frac{2}{q^n} < \frac{2}{\frac{2}{\varepsilon}} = \varepsilon$$
+
+
+    Seja 
+    \[W_{n, m} = \bigcup_{q = 2}^\infty V_{n, q} \cap (-m, m)\]
+
+    Note que \[\mathcal{L}\subset\bigcup_{q = 2}^\infty V_{n, q} \Rightarrow \mathcal{L} \cap (-m, m) \subset\bigcup_{q = 2}^\infty V_{n, q} \cap (-m, m) = W_{n,m}\]
+
+    Note que $\left(\frac{p}{q}+\frac{1}{q^n}\right) - \left(\frac{p}{q}-\frac{1}{q^n}\right) = \frac{2}{q^n}$. Portanto, a soma dos comprimentos dos intervalos contidos em $W_{n,m}$, será menor ou igual a 
+
+    \[\sum_{q=2}^\infty \sum_{p = -m\cdot q}^{m \cdot q}\frac{2}{q^n} = \sum_{q=2}^\infty \frac{2(2\cdot m \cdot q + 1)}{q^n} = \sum_{q=2}^\infty \frac{4\cdot m \cdot q + 2}{q^n} \]
+
+    Como $q \geq 2$, 
+
+    \[\sum_{q=2}^\infty \frac{4\cdot m \cdot q + 2}{q^n} \leq \sum_{q=2}^\infty \frac{4\cdot m \cdot q + q}{q^n} = (4 \cdot m + 1)\sum_{q=2}^\infty \frac{1}{q^{n-1}} \]
+
+    Note que para todo $n > 2$ a série será convergente, e, como $f(q) = \frac{1}{q^{n-1}}$ é contínua e decrescente, a aproximação com retângulos pela direita será menor que a integral. Se usarmos retângulos de base 1, essa aproximação será justamente a série que analisamos, e portanto $n> 2$ implica
+
+    \[\sum_{q=2}^\infty \frac{1}{q^{n-1}} < \int_1^\infty \frac{dq}{q^{n-1}} = \frac{1}{n-2}\]
+
+    
+    
+
+    Dessa forma, a soma dos tamanhos dos intervalos que pertencem a cada $W_{n, m}$ é menor ou igual a
+
+    \[\frac{4\cdot m +1}{n-2}\]
+
+    Ora, então quando $n$ tende ao infinito, essa soma obviamente tende a zero, ou seja, $\forall \varepsilon>0 \hspace{0.2cm} \exists n_\varepsilon$ tal que 
+    \[0 < \frac{4\cdot m + 1}{n_\varepsilon - 2} < \varepsilon\]
+
+    Ora, então a restrição de $\mathcal{L}$ ao intervalo $(-m, m)$ possui medida zero, pois é uma união enumerável de intervalos cuja soma dos comprimentos pode ser tão pequena quanto se queira. 
+
+    Note agora que
+
+    \[\mathcal{L} = \bigcup_{m\in \mathbb{N}} \left( \mathcal{L}\cap (-m, m)\right) \]
+
+    Ora, mas cada $\mathcal{L}\cap (-m, m)$ tem medida zero, e $\mathbb{N}$ é enumerável por definição. Segue, portanto, que $\mathcal{L}$ tem medida de Lebesgue zero.
+\end{dem}
+
+As propriedades surpreendentes de $\mathcal{L}$, todavia, não param por aí. É possível provar que trata-se de um conjunto denso sobre $\mathbb{R}$ — essa afirmação possui um significado muito mais profundo caso o leitor queira se aprofundar em topologia geral, mas, nesse contexto, é suficiente dizer que um conjunto $A$ é denso sobre $\mathbb{R}$ em todo intervalo aberto e não-nulo há pelo menos um representante de $A$. Em outras palavras, entre quaisquer dois números reais, há pelo menos um número contido em $A$. Para provar que $\mathcal{L}$ é denso sobre $\mathbb{R}$, todavia, precisamos provar uma proposição fundamental:
+
+\begin{proposition}
+\label{thm:translacao_infinita}
+    Se $x$  é um número de Liouville e $\frac{a}{b}$ é um número racional com $b>0$, então $x + \frac{a}{b} \in \mathcal{L}$.
+\end{proposition}
+
+\begin{dem}
+    Ora, se $x$ é um número de Liouville, existe uma sequência $\left(\frac{p_n}{q_n}\right)_{n \in \mathbb{N}}$ com $p_n, q_n$ relativamente primos tal que
+
+    \[0<\left| x - \frac{p_n}{q_n}\right| < \frac{1}{{q_n}^n}\]
+
+    Ao mesmo tempo, 
+
+    \[0<\left| x - \frac{p_n}{q_n}\right| = \left| \left(x + \frac{a}{b}\right) - \left(\frac{p_n}{q_n} + \frac{a}{b}\right)\right| = \left| \left(x + \frac{a}{b}\right) - \frac{p_n \cdot b + q_n\cdot a}{q_n\cdot b}\right|  < \frac{1}{q^n}\]
+
+    Seja $y = x + \frac{a}{b}$, $p'_n = p_n \cdot b + q_n\cdot a$ e $q'_n = q_n\cdot b$. Temos:
+
+    \[0 < \left| y - \frac{p'_n}{q'_n} \right| < \frac{1}{{q_n}^n}\]
+
+    Queremos mostrar que, se a desigualdade acima vale para todo $n \in \mathbb{N}$, então para todo $m\in\mathbb{N}$
+
+    \[0 < \left| y - \frac{p'_n}{q'_n} \right| < \frac{1}{\left(q'_n\right)^m}\]
+
+    Para isso, basta mostrar que para todo $m$, existe um $n$ tal que 
+
+    \[\frac{1}{{q_n}^n} < \frac{1}{\left(q_n'\right)^m}\]
+
+    Ora, trata-se do mesmo que mostrar que, para todo $m$ existe um $n$ tal que
+
+    \[{q_n}^n > \left(q'_n\right)^m=\left(q_n \cdot b\right)^m = q^m \cdot b^m\]
+
+    Note que isso é equivalente a encontrar, para todo $m$, um valor para $n$ tal que
+
+    \[{q_n}^{n-m} > b^m\]
+
+    Tome $n>m$. Temos: 
+
+    \[{q_n}^{n-m} > b^m \iff \left({q_n}^{n-m}\right)^{\frac{1}{n-m}} > \left(b^m\right)^{\frac{1}{n-m}} \iff q_n > b^{\frac{m}{n-m}}\]
+
+    Note agora que, quando $n \rightarrow\infty$, $q_n \rightarrow \infty$, mas $b^{\frac{m}{n-m}} \rightarrow 1$. Dessa forma, deve existir $n_0$ tal que, para todo $n \geq n_0$, vale:
+
+    \[ q_n > b^{\frac{m}{n-m}}\]
+
+    Dessa forma, para todo $m$, encontramos $n_0$ tal que
+
+    \[0 < \left| y - \frac{p'_{n_0}}{q'_{n_0}} \right| < \frac{1}{q^{n_0}}<\frac{1}{\left(q'\right)^m}\]
+
+    Como a sequência $\left(\frac{p_n}{q_n}\right)_{n\in\mathbb{N}}$ possui infinitos elementos distintos, a sequência $\left(\frac{p'_n}{q'_n}\right)_{n\in\mathbb{N}}$ também possuirá; e, portanto $y = x + \frac{a}{b}$ é um número de Liouville.
+\end{dem}
+
+Munidos dessa proposição, podemos provar facilmente o seguinte teorema:
+
+\begin{theorem}
+\label{thm:densidade_liouville}
+    Dado $(a, b)\in \mathbb{R}^2$ com $a <b$, $\exists x\in \mathcal{L}$ tal que $a<x<b$.
+\end{theorem}
+
+\begin{dem}
+    Ora, se $a < b$, então uma propriedade conhecida dos números racionais é de que existe um racional $\frac{p}{q}$ (com $q>0$) tal que $a<\frac{p}{q}<b$. 
+    Ao mesmo tempo, um número de Liouville pode ser arbitrariamente pequeno: $\forall\varepsilon > 0$, temos que existe algum $n$ tal que $\frac{1}{2^{n!}}<\varepsilon$. Basta notar que, se definirmos a sequência $\left(c_k\right)_{k\in \mathbb{N}}$ como:
+
+    \[\left\{\begin{matrix}
+        c_k = 0 \text{ , se } k\leq n \\ c_k = 1 \text{ , se } k > n
+    \end{matrix}\right.\]
+
+    teremos que 
+
+    \[ x_\varepsilon = \sum_{k=1}^\infty \frac{c_k}{2^{k!}} < \frac{1}{2^{n!}}<\varepsilon \]
+
+    Note que $x_\varepsilon$ é um número de Liouville, pois satisfaz às hipóteses do Teorema \ref{thm:medida_infinita}.
+
+    Note, também, que $a < \frac{p}{q} < b \Rightarrow a< \frac{p}{q} < \frac{p}{q} + \frac{b - \frac{p}{q}}{2}<b$. Tomando $\varepsilon = \frac{b - \frac{p}{q}}{2}$ (que obviamente é $>0$), teremos que $\frac{p}{q} + x_\varepsilon< \frac{p}{q} + \varepsilon< b$. 
+
+    Por consequência da proposição \ref{thm:translacao_infinita}, $\frac{p}{q} + x_\varepsilon$ é um número de Liouville, e, ao mesmo tempo, $a < \frac{p}{q} + x_\varepsilon < b$.
+\end{dem}

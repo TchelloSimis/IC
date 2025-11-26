@@ -1,0 +1,666 @@
+
+\section{O Teorema de Thue-Siegel-Dyson-Roth}
+O teorema de Thue-Siegel-Roth é um dos resultados mais importantes no contexto do estudo do expoente de irracionalidade. Essencialmente, o seu resultado prova que, se um número é algébrico de grau $n \geq 2$, seu expoente de irracionalidade é igual a 2. A demonstração desse teorema é muito elaborada, e foi alvo do estudo de diversos matemáticos ao longo da história. Thue, Siegel, e Dyson foram responsáveis por diminuir o limite superior da medida de irracionalidade de números algébricos, até que Roth finalmente conseguiu provar que seria exatamente igual a $2$. Nesta seção, trataremos dos precursores ao teorema final. 
+
+\subsection{O teorema de Thue}
+
+Em 1909, Axel Thue provou que há um máximo para a medida de irracionalidade de um número algébrico: se $\alpha$ é algébrico de grau $n \geq 3$, então $\mu_\mathcal{L}(\alpha) \leq (n+2)/2$. Isso é equivalente a provar que, para qualquer $\varepsilon > 0$, a inequação 
+
+    \[\left| \alpha - \frac{p}{q} \right| < \frac{1}{q^{\frac{n+2}{2}+\varepsilon}}\]
+
+possui uma quantidade finita de soluções. A demonstração original feita por Thue é bastante trabalhosa, e pode ser encontrada em \cite{ragognette2012}. Apresentamos, todavia, uma demonstração mais simplificada, contida em \cite{guth2016}, com a contrapartida de que nem todos os lemas e proposições intermediários usados serão demonstrados, sendo exibida apenas a intuição por detrás deles. 
+
+O primeiro é o Lema de Siegel, cuja demonstração pode ser encontrada em \cite[Lema D.4.1, p. 317-319]{hindry2000}.
+
+\begin{lemma}
+\label{lem:siegel}
+    Seja $L: \mathbb{Z}^M \rightarrow \mathbb{Z}^N$ uma aplicação linear dada por uma matriz com coeficientes inteiros. Então, se $M > N$, existe $x \in \mathbb{Z}^M\backslash\{0\}$ tal que $Lx = 0$ e $|x|_\infty \leq |L|_{op}^{N/(M-N)}+1$, em que
+    \[|L|_{op} = \sup_{x \in \mathbb{Z}^M \backslash \{0\}}\frac{|Lx|_\infty}{|x|_\infty}\]
+\end{lemma}
+
+Nesse contexto, $|x|_\infty$ é a \enquote{norma do supremo} — i.e., 
+
+\[|(x_1, \dots x_n)|_\infty = \displaystyle\sup_{1\leq i \leq n} |x_i|\]
+
+O que este lema nos garante é que, se tivermos um sistema linear homogêneo com coeficientes inteiros, e o número de equações é maior que o número de incógnitas, então temos um vetor solução $x$ cujas coordenadas são inteiras e, mais que isso, este vetor é pequeno (menor que a chamada norma operador de $L$, $|L|_{op}$) e fica menor, comparado à norma do próprio sistema, quanto mais equações \enquote{sobressalentes} tivermos. Nesse contexto, se $L$ pode ser representado por uma matriz $(a_{ij})$, então sua norma operador pode ser calculada por 
+\[|L|_{op} = \max_{1 \leq i \leq N} \sum_{j=1}^M|a_{ij}|\]
+isto é, a norma-operador de $L$ é igual à maior soma dos valores absolutos de uma das linhas de sua matriz correspondente. Por conta disso, se assumirmos que $(a_{ij}) \leq B \hspace{0.2cm} \forall \hspace{0.2cm} i,j$, teremos que $|L|_{op} \leq MB$, estabelecendo portanto um limite superior conciso para a solução inteira $x$. 
+
+O seguinte lema também será usado na demonstração: 
+\begin{lemma}
+\label{lem:auxiliar_siegel}
+    Suponha que $Q(\beta) = 0$, onde $Q \in \mathbb{Z}[x]$ com grau $n$ e coeficiente dominante $q_n$. Então, para qualquer $m \ge n$, podemos escrever
+    \[q_n^m \beta^m = \sum_{k=0}^{n-1} c_{km} \beta^k,\]
+    onde $c_{km} \in \mathbb{Z}$ e $|c_{km}| \le (2|Q|)^m$, sendo $|Q| = \max_{0\leq i \leq n} q_i$
+\end{lemma}
+\begin{dem}
+    Sejam 
+    
+    \[ \left\{\begin{matrix}
+     Q(x) = q_nx^n + q_{n-1}x^{n-1}+\dots+ q_0\text{ , com } q_i \in \mathbb{Z} \text{ e } q_n \neq 0 \\ |Q| = \max_{0\leq i \leq n} q_i
+    \end{matrix}\right.\]
+    
+    Como $q_n \neq 0$, temos que $|Q| \geq q_n \geq 1$ (pois $q_n$ é inteiro). Por hipótese, $Q(\beta) = 0$ e, portanto, 
+    \begin{equation}
+    \label{eq:siegel_1}
+        q_n\beta^n = - (q_{n-1}\beta^{n-1}+\dots+q_0)
+    \end{equation}
+    
+    Provaremos por indução em $m$ que, para $m \geq n$, 
+    
+    \[q_n^m\beta^m = \sum_{k=0}^{n-1} c_{km}\beta^k\]
+    em que $c_{km} \in \mathbb{Z}$ e $c_{km} \leq (2|Q|)^m$.
+    
+    Caso base: $m = n$. 
+    
+    Multiplicamos \eqref{eq:siegel_1} por $q_n^{n-1}$:
+    
+    \[q_n^{n-1}(q_n\beta^n) = q_n^n\beta^n=q_n^{n-1}\left(- \sum_{k=0}^{n-1}q_k\beta^k \right) = \sum_{k=0}^{n-1}(-q_n^{n-1}q_k)\beta^k\]
+    
+    Como $m=n$, seja $c_{kn} = (-q_n^{n-1}q_k)$ para $k = 0, 1,..., n-1$. Vamos comparar as magnitudes de $c_{kn}$ e $(2|Q|)^m$:
+    
+    Por definição, $|q_i|\leq |Q|$. Então $|c_{kn}| \leq |Q|^{n-1}|Q| = |Q|^n<2^n|Q|^n = (2|Q|)^n$. Portanto, o caso base vale. 
+    
+    Hipótese de indução: assuma que, para algum $m \geq n$, $q_n^m \beta^m = \sum_{k=0}^{n-1} c_{km} \beta^k$, com $c_{km} \in \mathbb{Z}$ e $|c_{km}| \le (2|Q|)^m$. Queremos demonstrar que o mesmo vale para $m+1$, i.e.: $q_n^{m+1} \beta^{m+1} = \sum_{k=0}^{n-1} c_{k,m+1} \beta^k$, com $c_{k,m+1} \in \mathbb{Z}$ e $|c_{k,m+1}| \le (2|Q|)^{m+1}$
+    
+    Note que $q_n^{m+1} \beta^{m+1} = q_n\beta(q_n^m\beta^m)$. Usando a hipótese de indução, isso significa que:
+    \[q_n^{m+1} \beta^{m+1} = q_n\beta\left(\sum_{k=0}^{n-1} c_{km} \beta^k\right)=\sum_{k=0}^{n-1} q_nc_{km} \beta^{k+1}\]
+    
+    Separando o termo de $k = n-1$: 
+    
+    \[q_n^{m+1} \beta^{m+1} = q_nc_{n-1,m}\beta^n + \sum_{k=0}^{n-2} q_nc_{km} \beta^{k+1}\]
+    
+    Usando novamente \eqref{eq:siegel_1}, teremos:
+    \[q_n^{m+1} \beta^{m+1} = c_{n-1,m}(q_n\beta^n) + \sum_{k=0}^{n-2} q_nc_{km} \beta^{k+1} = c_{n-1,m}\left(- \sum_{k=0}^{n-1}q_k\beta^k \right) + \sum_{k=0}^{n-2} q_nc_{km} \beta^{k+1} =\]
+    \[\sum_{k=0}^{n-1}(-c_{n-1,m}q_k)\beta^k + \sum_{k=1}^{n-1} (q_nc_{k-1,m}) \beta^{k}\]
+    
+    Simplificando a notação da segunda somatória: 
+    
+    \[q_n^{m+1} \beta^{m+1} = \sum_{k=0}^{n-1}(-c_{n-1,m}q_k)\beta^k + \sum_{k=1}^{n-1} (q_nc_{k-1,m}) \beta^{k}\]
+    
+    Os coeficientes $c_{k, m+1}$ são:
+    
+    \[\left\{\begin{matrix}
+       k = 0: c_{0, m+1} = -c_{n-1,m}q_0 \\ 
+       1 \leq k  \leq n-1: c_{k, m+1} = -c_{n-1,k}q_k+c_{k-1,m}q_n
+    \end{matrix}\right.\]
+    
+    Vamos checar suas magnitudes: 
+    Para $k=0$:
+    $|c_{0, m+1}| = |c_{n-1,m}||q_0|$. Pela hipótese de indução e pela definição de $|Q|$, portanto,  $|c_{0, m+1}| \leq (2|Q|)^m|Q| = \frac{|2Q|}{2}|(2|Q|)^m = \frac{(2|Q|)^{m+1}}{2}< (2|Q|)^{m+1}$
+    
+    Para $1 \leq k \leq n-1$:
+    $|c_{k, m+1}| = |-c_{n-1,m}q_k+c_{k-1,m}q_n| \leq|-c_{n-1,m}q_k|+|c_{k-1,m}q_n| = |c_{n-1,m}||q_k|+|c_{k-1,m}||q_n|$.
+    Novamente usando a definição de $|Q|$ e a hipótese de indução, temos $|c_{k, m+1}| \leq (2|Q|)^m|Q| + (2|Q|)^m|Q| = 2|Q|(2|Q|)^m = (2|Q|)^{m+1}$ e, portanto, a afirmação inicial valerá para todo $m \geq n.$
+\end{dem}
+
+É evidente que, da forma como definimos a norma do polinômio, que o enunciado também vale para a norma $|Q| = \sum_i |q_i|$. Em essência, o que esse lema demonstra é que, se $\beta$ é uma raiz de um polinômio $Q$ de grau $n$ e com coeficientes inteiros, então $m\geq n$ implica que $q_n^m\beta^m$ pode ser expressado como uma combinação linear de elementos de $\{ 1, \beta, ..., \beta^{n-1}\}$, e que os coeficientes dessa combinação linear deverão ser limitados por $(2|Q|)^m$. Estes dois lemas podem ser usados para provar a seguinte proposição:
+
+\begin{proposition}
+\label{prop:upper_bound}
+    Seja $\beta \in \mathbb{R}$ um algébrico de grau $n$. Suponha $\varepsilon > 0$. Para qualquer inteiro suficientemente grande $m$, existe um polinômio $P \in \mathbb{Z}[x_1, x_2]$ de forma $P(x_1, x_2) = P_1(x_1)x_2 + P_0(x_1)$  tal que:
+
+    \begin{itemize}
+        \item $\partial_1^j P(\beta, \beta) = 0$ para $0 \leq j \leq m - 1$.
+        \item $\deg P \leq \frac{1 + \varepsilon}{2}nm + 2$.
+        \item $|P| \leq C(\beta)^{m/\varepsilon}$.
+    \end{itemize}
+\end{proposition}
+
+\begin{dem}
+    Queremos encontrar um polinômio $P(x_1, x_2) = P_1(x_1)x_2 + P_0(x_1)$ com coeficientes inteiros que satisfaça as condições dadas. Escreveremos:
+
+    \[P_0(x_1) = \sum_{k=0}^{D_0} b_kx_1^k \text{ , e } \; P_1(x_1) = \sum_{k=0}^{D_1} a_kx_1^k\]
+    %
+    em que $a_k, b_k$ são os coeficientes inteiros a serem determinados. O grau de $P$ é $\max(D_1+1, D_0)$. Para simplificar a notação, escolheremos $D_0 = D_1 = D$, com a contrapartida que $a_D$ ou $b_D$ podem ser iguais a zero. A primeira condição é que $\partial_1^j P(\beta, \beta) = 0$ para $j = 0, 1, ..., m-1$. Vamos calcular as derivadas:
+
+    \[\partial_1^jP(\beta, \beta) = (\partial_1^jP_1)(\beta)\beta + (\partial_1^jP_0)(\beta) =\]
+    \[= \beta \left( \sum_{k=j}^{D}a_k \frac{k!}{(k-j)!}\beta^{k-j} \right) + \sum_{k=j}^{D} b_k \frac{k!}{(k-j)!}\beta^{k-j}=\]
+    \[=\sum_{k=j}^{D}a_k \frac{k!}{(k-j)!}\beta^{k-j+1} + \sum_{k=j}^{D} b_k \frac{k!}{(k-j)!}\beta^{k-j} = 0\]
+       
+    Como há uma equação para cada $j = 0, ..., m-1$, temos um total de $m$ equações. Note, contudo, que  $\frac{k!}{(k-j)!}$ é divisível por $j!$, pois$\frac{k!}{(k-j)!j!} = \binom{k}{j}$. A equação se torna:
+
+    \begin{equation}
+    \label{eq:siegel_2}
+        \frac{1}{j!}\partial_1^jP(\beta, \beta) = \sum_{k=j}^{D}a_k \binom{k}{j}\beta^{k-j+1} + \sum_{k=j}^{D} b_k \binom{k}{j}\beta^{k-j} = 0
+    \end{equation}
+    
+
+    Escolheremos $D \le nm$, e portanto os coeficientes $\binom{k}{j}$ são tais que
+
+    \[\binom{k}{j} \le 2^k \le 2^D\]
+
+    Ora, mas $\beta$ é um algébrico de grau $n$. Portanto, qualquer potência de $\beta$ pode ser reescrita como combinação linear de $\{1, \beta,\dots,\beta^{n-1}\}$ com coeficientes racionais. Portanto, para cada $j = 0, \dots, m-1$ podemos converter \eqref{eq:siegel_2} para a forma
+
+    \[\sum_{k=j}^{D}a_k \binom{k}{j}\beta^{k-j+1} + \sum_{k=j}^{D} b_k \binom{k}{j}\beta^{k-j}  = \sum_{i=0}^{n-1}\beta^i \left(\sum_{k=j}^{D}\binom{k}{j}A_{i,j,k}\cdot  a_k +\sum_{k=j}^{D} \binom{k}{j}B_{i,j,k}\cdot b_k \right) = 0\]
+    %
+    em que $A_{i,j,k}$ e $B_{i,j,k}$ são racionais.
+
+    Ora, mas $\{1, \beta, \dots, \beta^{n-1}\}$ é precisamente a base de $\mathbb{Q}(\beta)$. Portanto, é linearmente independente, e, para cada $i = 0, \dots, n-1$ fixado, isso quer dizer que
+
+    \begin{equation}
+    \label{eq:siegel_3}
+        \sum_{k=j}^{D}\binom{k}{j}A_{i,j,k}\cdot  a_k +\sum_{k=j}^{D} \binom{k}{j}B_{i,j,k}\cdot b_k  = 0
+    \end{equation}
+ 
+    Portanto, para cada $j= 0, \dots , m-1$, temos $n$ equações de coeficientes racionais. Dessa forma, o total de equações $N$ é igual a $mn$. Para converter estes racionais para inteiros, notamos que a maior potência de $\beta$ que aparece em \eqref{eq:siegel_2} é $\beta^{D+1}$. Dessa forma, definindo $Q(x) = q_0 + q_1x+\dots+ q_nx^n$ como o polinômio minimal de $\beta$, podemos multiplicar \eqref{eq:siegel_2} por $q_n^{D+1}$, obtendo 
+    
+    \[\sum_{k=j}^{D}a_k \binom{k}{j}q_n^{D+1}\beta^{k-j+1} + \sum_{k=j}^{D} b_k \binom{k}{j}q_n^{D+1}\beta^{k-j}  =\]
+    \[=\sum_{i=0}^{n-1}q_n^{D+1}\beta^i \left(\sum_{k=j}^{D}\binom{k}{j}A_{i,j,k}\cdot  a_k +\sum_{k=j}^{D} \binom{k}{j}B_{i,j,k}\cdot b_k \right)= 0\]
+
+    Nesse caso, podemos invocar o Lema \ref{lem:auxiliar_siegel} para garantir que $q_n^{D+1}A_{i,j,k}$ e $q_n^{D+1}B_{i,j,k}$ são inteiros e, mais que isso, que $A_{i,j,k}$ e $B_{i,j,k}$ são menores ou iguais a $(2q_n)^{D+1}$. Ora, com essa multiplicação, cada equação da forma de \eqref{eq:siegel_3} se torna:
+
+    \[\sum_{k=j}^{D}q^{D+1}\binom{k}{j}A_{i,j,k}\cdot  a_k +\sum_{k=j}^{D} q^{D+1}\binom{k}{j}B_{i,j,k}\cdot b_k  = 0\]
+
+    Note, então, que $\binom{k}{j} \le 2^D$ e $A_{i,j,k}, B_{i,j,k} \le (2q_n)^{D+1}$. Dessa forma, as entradas na matriz que representa os coeficientes inteiros desta equação serão menores ou iguais a 
+    
+    \[2^D(2q_n)^{D+1} \le 2^{nm}(2q_n)^{nm+1} \le2^{nm}(2q_n)^{nm+m} = (2^nq_n^{n+1})^m\]
+
+    As variáveis são $a_0,...a_D,b_0,...b_D$. Temos, portanto, $2D+2$ variáveis. A norma operador da matriz que representa os coeficientes da equação, portanto é menor ou igual a 
+
+    \[(2D+2)(2^nq_n^{n+1})^m \le (2mn+2)(2^nq_n^{n+1})^m \le m(2n+2)(2^nq_n^{n+1})^m \le m((2n+2)2^nq_n^{n+1})^m \]
+
+    Note que $q_n$ e $n$ são constantes em relação a $\beta$. Definindo $C_1(\beta) = (2n+2)2^nq_n^{n+1}$, a norma operador da matriz é menor ou igual a $mC_1(\beta)^m$. Podemos simplificar mais ainda:
+
+    \[mC_1(\beta)^m \le 2^m C_1(\beta)^m = (2C_1(\beta))^m \]
+
+    Portanto, definindo $C_2(\beta) = 2C_1(\beta)$, a norma operador da matriz será menor ou igual a $C_2(\beta)^m$.
+
+    Agora vamos aplicar o Lema \ref{lem:siegel}: temos $N = mn$ equações e $D = 2D+2$ variáveis. Como $m$ é suposto como suficientemente grande, podemos escolher $D$ para satisfazer a segunda condição da proposição, de forma que 
+    \[D \le \frac{1+\varepsilon}{2}nm\]
+    %
+    mas, ao mesmo tempo, 
+    \[M = 2D+2 \ge (1+ \frac{\varepsilon}{2})nm = (1+ \frac{\varepsilon}{2})N\]
+
+    Vamos calcular o expoente da estimativa dada pelo Lema \ref{lem:siegel}:
+
+    \[\frac{N}{M-N} = \frac{N}{(1+ \frac{\varepsilon}{2})N - N}=\frac{N}{\frac{\varepsilon}{2}N}=\frac{2}{\varepsilon}\]
+
+    Com isso, a estimativa dada pelo Lema de Siegel nos garante que 
+    \[\max \{a_0,\dots a_D,b_0,\dots b_D\} = (C_2(\beta)^m)^{2/\varepsilon}+1 = (C_2(\beta)^2)^{m/\varepsilon}+1 \le (2C_2(\beta)^2)^{m/\varepsilon}.\]
+    
+    Por fim, definindo $C(\beta) = 2C_2(\beta)^2$, notamos que $|P| = \max \{a_0,\dots a_D,b_0,\dots b_D\} \le C(\beta)^{m/\varepsilon}$, e conseguimos todas as condições exigidas pela proposição.
+    
+\end{dem}
+
+O que essa proposição nos garante é que, para cada número algébrico, teremos um polinômio de coeficientes inteiros com uma forma específica ($P_1(x_1)x_2 + P_0(x_1)$, que pode ser interpretado como um polinômio de grau $1$ em $x_2$ com coeficientes que são outros polinômios) que se anula de ordem $m$ em $(\beta, \beta)$ (i.e., além da própria função se anular, todas as suas derivadas parciais na primeira coordenada até a $m$-ésima são 0 quando avaliadas em $(\beta, \beta)$) e, mais que isso, que o grau e a norma deste polinômio são limitados pelos valores de $m$, $\beta$ e $\varepsilon$.
+
+Para esta demonstração do teorema de Thue, também é interessante lembrar o teorema de Taylor:
+
+\begin{theorem}[Teorema de Taylor]
+\label{thm:taylor}
+    Se $f$ é uma função infinitamente derivável em um intervalo, então $f(x+h)$ pode ser aproximada pela sua expansão de Taylor em torno de $x$:
+    \[f(x+h) = \sum_{j=0}^{m-1} \frac{1}{j!} \partial^j f(x) h^j + E\]
+    
+    onde o termo de erro $E$ é limitado por
+    
+    \[|E| \leq \frac{1}{m!} \sup_{y \in [x,x+h]} |\partial^m f(y)| h^m\]
+\end{theorem}
+
+Um corolário do Teorema de Taylor é o seguinte: 
+
+\begin{corollary}
+\label{cor:polynomial_norm}
+    Dado $Q$ um polinômio de grau $n$ de uma variável que se anula de ordem $m \geq 1$ em $x$ se $|h| \leq 1$, então
+    \[|Q(x+h)| \leq C(x)^n |Q| |h|^m.\]
+\end{corollary}
+
+\begin{dem}
+    Ora, se $Q$ se anula em $x$ em ordem $m \geq 1$, então temos:
+
+    \[\left\{\begin{matrix}
+    \partial^1Q(x) = 0 \\ \dots \\ \partial^{m-1}Q(x) = 0
+    \end{matrix}\right.\]
+
+    Ademais, como $Q$ é um polinômio, podemos realizar sua expansão de Taylor em torno de $x$:
+
+    \[Q(x+h) = \sum_{j=0}^{m-1} \frac{1}{j!} \partial^j Q(x) h^j + E\]
+
+    Como as $m-1$ primeiras derivadas são zero por hipótese, temos $Q(x+h) = E$ e, portanto, $|Q(x+h)| = |E|$. Ao mesmo tempo, denotando $[x, x+h]$ como o segmento de $x$ a $x+h$ (mesmo em caso de $h$ ser negativo), temos:
+
+    \[|E| \leq \frac{1}{m!} \sup_{y \in [x,x+h]} |\partial^m Q(y)| |h|^m\]
+
+    Seja $Q(t) = \sum_{k=0}^n a_kt^k$. Assim como fizemos na última demonstração, definimos $|Q|$ como $\max_{0\leq k \leq n} |a_k|$. A $m$-ésima derivada de $Q(t)$ é 
+
+    \[\partial^mQ(t) = \sum_{k=m}^n a_k \frac{k!}{(k-m)!}t^{k-m}\]
+
+    uma vez que, para $k < m$, a derivada é igual a zero por hipótese. Seja então $y$ um ponto qualquer do segmento $[x, x+h]$. Ora, então $|y| \leq |x| + 1$. Seja então $Y_0 = |x| +1$. Ora, então $|y| \leq Y_0$. Consideremos $|\partial^mQ(y)|$:
+
+    \[\begin{aligned}|\partial^m Q(y)| &= \left| \sum_{k=m}^n a_k \frac{k!}{(k-m)!} y^{k-m} \right| \\ &\leq \sum_{k=m}^n |a_k| \frac{k!}{(k-m)!} |y|^{k-m} \\ &\leq |Q| \sum_{k=m}^n \frac{k!}{(k-m)!} |y|^{k-m} \quad (\text{como } |a_k| \leq |Q|) \\ &\leq |Q| \sum_{k=m}^n \frac{k!}{(k-m)!} Y_0^{k-m} \quad (\text{como } |y| \leq Y_0 \text{ e } Y_0 \geq 1)\end{aligned}\]
+
+    Como essa limitação vale para qualquer $y$ no segmento, temos:
+
+    \[\sup_{y \in [x,x+h]} |\partial^m Q(y)| |h|^m \leq |Q| \sum_{k=m}^n \frac{k!}{(k-m)!} Y_0^{k-m}\]
+
+    E, portanto,
+
+    \[|Q(x+h) \leq \frac{1}{m!}\left(|Q| \sum_{k=m}^n \frac{k!}{(k-m)!} Y_0^{k-m} \right)|h|^m =\left(\sum_{k=m}^n \frac{k!}{m!(k-m)!} Y_0^{k-m} \right)|Q||h|^m =\]
+    \[= \left(\sum_{k=m}^{n} \binom{k}{m}Y_0^{k-m}\right)|Q||h|^m\]
+
+    Vamos analisar apenas $K = \sum_{k=m}^{n} \binom{k}{m}Y_0^{k-m}$. Se substituirmos $j = k-m$, teremos:
+
+    \[K = \sum_{j=0}^{n-m} \binom{j+m}{m}Y_0^j\]
+
+    Como $Y_0 \geq 1$ $Y_0^j, \leq Y_0^{n-m}$ para $j \leq n-m$. Portanto, 
+
+    \[K \leq \sum_{j=0}^{n-m} \binom{j+m}{m} Y_0^{n-m} = Y_0^{n-m} \sum_{j=0}^{n-m} \binom{j+m}{m}\]
+
+    Lembrando da identidade $\sum_{i=r}^n \binom{i}{r}= \binom{N+1}{r+1}$, temos:
+
+    \[K \leq Y_0^{n-m} \sum_{j=0}^{n-m} \binom{j+m}{m} = Y_0^{n-m} \binom{n+1}{m+1}= \binom{n+1}{m+1} (|x|+1)^{n-m}\]
+
+    E, portanto,
+
+    \[|Q(x+h)| \leq \binom{n+1}{m+1}(|x|+1)^{n-m}|Q||h|^m\]
+
+    Para provar o corolário, portanto, resta encontrar uma função $C(x)$ tal que 
+
+    \[\binom{n+1}{m+1}(|x|+1)^{n-m} \leq (C(x))^n\]
+
+    Note que
+    \[\binom{n+1}{m+1}(|x|+1)^{n-m} < \binom{n+1}{m+1}(|x|+1)^{n} \le 2^{n+1}(|x|+1)^{n}\]
+
+    Definindo $C(x) = 2^{n+1/n}(|x|+1)$, temos $C(x)^n \ge \binom{n+1}{m+1}(|x|+1)^{n-m}$, concluindo a demonstração.
+  
+\end{dem}
+
+Assim como em \ref{lem:auxiliar_siegel}, a norma escolhida para o polinômio poderia ser também a soma do valor absoluto de seus coeficientes. Esse corolário nos permitirá usar uma versão Proposição \ref{prop:upper_bound} com números racionais:
+
+\begin{proposition}
+\label{prop:index_theorem}
+    Seja $\beta$ é um algébrico de grau $n \geq 3$, $s$ um número real tal que $s > (n+2)/2$, e $r_1 = p_1/q_1$ e $r_2 = p_2/q_2$ racionais que satisfazem a desigualdade $|\beta - r_i| \le q_i^{-s}$. Assumindo $q_1 < q_2$, e definindo $m$  como o inteiro tal que $q_1^m \le q_2 < q_1^{m+1}$ e que, dados $\beta$ e $s$, temos $q_1$ e $m$ suficientemente grandes.
+    Então, existe um polinômio $P \in \mathbb{Z}[x_1, x_2]$ da forma $P(x_1, x_2) = P_1(x_1)x_2 + P_0(x_1)$, e constantes $c(\beta, s) > 0$ e $C(\beta, s) > 0$ tais que:
+    \begin{itemize}
+        \item $\partial_1^j P(r_1, r_2) = 0$ para $0 \le j < c(\beta, s)m$.
+        \item $|P| \le C(\beta, s)^m$.
+        \item $\deg P \le C(\beta, s)m$.
+    \end{itemize}
+\end{proposition}
+
+A demonstração dessa proposição pode ser encontrada em \cite[pp. 263-265]{guth2016} e essencialmente envolve utilizar a Proposição \ref{prop:upper_bound} para construir um polinômio que satisfaz a segunda e a terceira condições usando $\varepsilon = (1/10n)(s - (n+2)/2)$, e então usar o Corolário \ref{cor:polynomial_norm} para mostrar que o valor absoluto das derivadas deste polinômio em $(r_1, r_2)$ deve ser tão pequeno quanto se queira, e, portanto, que estas se anulam. 
+
+Outro lema utilizado na demonstração é o Lema de Gauss: 
+
+\begin{lemma}[Lema de Gauss]
+\label{lem:gauss}
+    Seja $r = p/q$ um número racional (com $p$ e $q$ primos entre si) e $P \in \mathbb{Z}[x]$ tal que $\partial^j P(r) = 0$ para $j = 0,..., l-1$. Então existe $P_1 \in \mathbb{Z}[x]$ tal que $P(x) = (qx - p)^lP_1(x)$
+\end{lemma}
+
+\begin{dem}
+    A condição de que as $l$ primeiras derivadas de $P(x)$ se anulam em $r = p/q$ significa que $r$ é uma raiz de $P(x)$ com multiplicidade de pelo menos $l$. Isso quer dizer que $(x - r)^l$ divide $P(x)$.
+    
+    Reescrevendo $(x - r)^l$:
+    
+    \[(x - r)^l = \left(x - \frac{p}{q}\right)^l = \left(\frac{qx - p}{q}\right)^l = \frac{1}{q^l}(qx - p)^l\]
+    
+    Como $P(x)$ é um múltiplo de $(x-r)^l$, podemos escrever $P(x) = (qx - p)^l \cdot P_2(x)$ para algum polinômio $P_2(x)$.
+
+    $P(x)$ tem coeficientes inteiros, e o fator $(qx - p)^l$ também tem coeficientes inteiros (pois $p$ e $q$ são inteiros). Portanto, ao realizar a divisão de polinômios, temos $P_2(x) = \frac{P(x)}{(qx-p)^l}$, em que o resultado será um polinômio com coeficientes racionais. Portanto, $P_2(x) \in \mathbb{Q}[x]$.
+    
+    Queremos provar que os coeficientes são, na verdade, inteiros.
+
+    Como $P_2(x)$ tem coeficientes racionais, podemos escrever todos os seus coeficientes com um denominador comum, $M$. Assim, podemos expressar $P_2(x)$ como:
+    
+    \[P_2(x) = \frac{1}{M} \tilde{P}_2(x),\]
+    %
+    onde $\tilde{P}_2(x)$ é um polinômio com coeficientes inteiros, e escolhemos $M$ de forma que os coeficientes de $\tilde{P}_2(x)$ não todos divisíveis pelo mesmo fator primo.
+    
+    Substituindo na equação original, obtemos:
+    $P(x) = \frac{1}{M}(qx - p)^l \tilde{P}_2(x)$
+    
+    Multiplicando ambos os lados por $M$:
+    
+    \[M \cdot P(x) = (qx - p)^l \tilde{P}_2(x)\]
+
+    Suponha que $|M| \neq 1$. Isso significa que $M$ deve ter pelo menos um fator primo. Vamos chamar esse fator primo de $s$.
+    
+    Agora, vamos analisar a equação $M \cdot P(x) = (qx - p)^l \tilde{P}_2(x)$ \enquote{módulo $s$}:
+
+     Como $s$ é um fator de $M$, temos que $M \equiv 0 \pmod{s}$. Portanto, o lado esquerdo se torna:
+        \[M \cdot P(x) \equiv 0 \cdot P(x) \equiv 0 \pmod{s}\]
+
+    O lado direito é $(qx - p)^l \tilde{P}_2(x)$. Note que o fator $(qx-p)$ não é nulo módulo $s$: se fosse, teríamos $q \equiv 0 \pmod{s}$ e $p \equiv 0 \pmod{s}$. Isso implicaria que $s$ é um fator comum de $p$ e $q$. Mas $r = p/q$ é uma fração irredutível, então $p$ e $q$ são primos entre si e não têm fatores primos em comum. Logo, $(qx-p) \not\equiv 0 \pmod{s}$. 
+    
+    Ao mesmo tempo, $\tilde{P}_2(x)$ também não é nulo por construção, pois o definimos de forma que não há nenhum primo que divida todos os seus coeficientes. Como $s$ é um primo, ele não pode dividir todos os coeficientes de $\tilde{P}_2(x)$. Logo, $\tilde{P}_2(x) \not\equiv 0 \pmod{s}$.
+
+    Chegamos, portanto, a uma contradição, e $M$ não pode ter fatores primos. Logo, $\tilde{P}_2 \in \mathbb{Z}[x]$, e, definindo $P_1 = \tilde{P}_2 $, temos o resultado desejado.
+\end{dem}
+
+Essencialmente, o que este lema nos garante é que, se temos um polinômio de coeficientes inteiros com uma raiz racional $p/q$ na qual o polinômio se anula de ordem $l$, então ao \enquote{retirar} essa raiz do polinômio, o polinômio resultante também terá coeficientes inteiros. Mais que isso, é notável é que $q^l$ deve dividir o coeficiente líder de $P$: se $P(x) = a_0 + ...+a_nx^n$ e $P_1(x) = b_0+ ...+b_mx^m$, com $a_i, b_j \in \mathbb{Z}$, temos
+
+\[a_0+\dots+a_nx^n = (qx - p)^l(b_0+\dots+b_mx^m) = (q^lx^l+\dots)(b_0+\dots b_mx^m) \implies\]
+\[\implies a_nx^n = q^lx^lb_mx^m \implies a_n = q^lb_m\]
+
+
+Portanto, $|P| \ge q^l$. Com esse lema, podemos provar a última proposição necessária para provar o Teorema de Thue:
+
+\begin{proposition}
+\label{prop:lower_bound}
+    Sejam $P(x_1, x_2) = P_q(x_1)x_2 + P_0(x_1) \in \mathbb{Z}[x_1, x_2]$ e $(r_1, r_2) = (p_1/q_1, p_2/q_2) \in \mathbb{Q}^2$. Se $\partial_1^jP(r_1, r_2) = 0$ para $j = 0, ..., l-1$ e $l\ge 2$, então
+
+    \[|P| \ge min\left(\frac{q_1^{(l-1)/2}}{2\cdot \deg P}, q_2 \right)\]
+\end{proposition}
+
+\begin{dem}
+    Nossa hipótese é que
+    
+    \[\partial_1^j P_1(r_1)r_2 + \partial_1^j P_0(r_1) = 0, \quad \text{para} \quad 0 \le j \le l-1\]
+    
+    Seja $V(x)$ o vetor $(P_1(x), P_0(x))$. Então a hipótese é que, para $0 \le j \le l-1$, as derivadas $\partial^j V(r_1)$ todas pertencem à reta $V \cdot (r_2, 1) = 0$. Em particular, isso quer dizer que quaisquer duas dessas derivadas são linearmente dependentes. Isso nos diz que muitos determinantes se anulam. Denotando, para $V, W \in \mathbb{R}^2$, $[V, W]$ como a matriz $2 \times 2$ com a primeira coluna $V$ e a segunda coluna $W$, temos
+    
+    \[\det[\partial^{j_1}V, \partial^{j_2}V](r_1) = 0, \text{ para quaisquer } 0 \le j_1, j_2 \le l-1\]
+    
+    Como o determinante é um funcional multilinear, temos a regra de Leibniz $\partial \det[V, W] = \det[\partial V, W] + \det[V, \partial W]$, que vale para quaisquer funções vetoriais $V, W: \mathbb{R} \to \mathbb{R}^2$. Usando isso, temos:
+    
+    \[\partial^j \det[V, \partial V](r_1) = 0, \text{ para quaisquer } 0 \le j \le l-2\]
+    
+    Note que $\det[V, \partial V]$ é um polinômio de coeficientes inteiros; e, se esse polinômio é não-nulo, então o corolário do Lema \ref{lem:gauss} nos garante que
+    
+    \[|\det[V, \partial V]| \ge q_1^{l-1}\]
+    
+    Analisando $|\det[V, \partial V]|$, notamos que:
+    
+    \[|\det[V, \partial V]| = |(\partial P_0)P_1 - P_0(\partial P_1)| \le |(\partial P_0)P_1| + |P_0(\partial P_1)| \le \deg P |P|^2 + \deg P |P|^2\le 2(\deg P |P|)^2 \]
+    %
+    e, portanto,
+    
+    \[q_1^{l-1} \le2(\deg P |P|)^2 \implies |P| \ge \frac{q_1^{(l-1)/2}}{2\cdot \deg P}\]
+
+    Caso o polinômio $\det[V, \partial V]$ seja identicamente nulo, então
+
+    \[\partial\left(\frac{P_0}{P_1} \right) = \frac{(\partial P_0)P_1 - P_0(\partial P_1)}{{P_1}^2} =0,\]
+    %
+    pois seu numerador (que é justamente o determinante de $[V, \partial V]$) é zero. Portanto, a razão entre $P_1$ e $P_0$ deve ser uma constante. Logo, existe $A \in \mathbb{R}$ tal que
+    
+    \[P_0 = A \cdot P_1 \implies P(x_1, x_2) = (x_2 + A)P_1(x_1)\]
+
+    Voltando à condição de que $P$ se anula de ordem $l$ em $(r_1, r_2)$, temos que:
+
+    \[\partial_1^j P(r_1, r_2) = (r_2 + A) \partial_1^j P_1(r_1)=0, \quad \text{para} \quad j = 0, \dots, l-1\]
+
+    Nesse caso, temos duas possibilidades: 
+
+    Se $r_2 + A = 0$, a constante $A$ é $-r_2 = -p_2/q_2$. O polinômio se torna:
+    
+    \[P(x_1, x_2) = (x_2 - p_2/q_2)P_1(x_1) = \frac{1}{q_2}(q_2x_2 - p_2)P_1(x_1)\]
+    
+    Como $P$ e $P_1$ têm coeficientes inteiros, o Lema \ref{lem:gauss} garante que podemos encontrar $\tilde{P}(x_1)$ tal que 
+    
+    \[P(x_1, x_2) = (q_2x_2 - p_2)\tilde{P}(x_1),\]
+    %
+    onde $\tilde{P}(x_1)$ também tem coeficientes inteiros. Dessa forma, $|P| \ge q_2$. 
+
+    Se $(r_2 + A) \ne 0$, temos que 
+
+    \[\partial_1^j P_1(r_1)=0, \quad \text{para} \quad j = 0, \dots, l-1\] 
+    
+    Usando mais uma vez o Lema \ref{lem:gauss}, temos que 
+    
+    \[|P| \ge q_1^l \ge \frac{q_1^{(l-1)/2}}{2\cdot \deg P},\]
+%
+    concluindo assim a demonstração.
+
+
+\end{dem}
+
+Essa proposição estabelece um limite inferior para a norma de um polinômio que se anula em ordem alta, enquanto a Proposição \ref{prop:upper_bound} estabelece um limite superior. Podemos, portanto, encontrar uma contradição caso o limite inferior seja maior que o superior.
+
+Com esses lemas e proposições, podemos facilmente provar o Teorema de Thue:
+
+\begin{theorem}[Teorema de Thue]
+\label{thm:thue}
+    Seja $\beta$ um algébrico de grau $n$. Então a inequação
+
+    \[\left|\beta - \frac{p}{q} \right| \le \frac{1}{q^\mu}\]
+    %
+    possui apenas uma quantidade finita de soluções se $\mu > (n+2)/2$ (ou, em outras palavras, $\mu_{\mathcal{L}}(\beta) \le (n+2)/2$).
+\end{theorem}
+
+\begin{dem}
+    Suponha que existam infinitas soluções. Então existe uma sequência $\left\{\frac{p_n}{q_n} \right\}_{n \in \mathbb{N}}$ que satisfaça
+
+    \[\left|\beta - \frac{p}{q} \right| \le \frac{1}{q^\mu}\]
+    %
+    com $\mu > (n+2)/2$. Lembrando que $q_n \rightarrow\infty$, podemos tomar $q_1$ e $q_2$ tão grandes quanto se queira.
+    Escolheremos o valor de $m$ de forma que 
+    
+    \[{q_1}^m \le q_2 \le {q_1}^{m+1}\]
+
+    A Proposição \ref{prop:index_theorem} nos garante que existe um polinômio $P \in \mathbb{Z}[x_1, x_2]$ de forma $P(x_1, x_2)= P_1(x_1)x_2 + P_0(x_1)$ e constantes $c(\beta, s) > 0$ e $C(\beta, s) > 0$ tais que:
+    
+    \begin{itemize}
+        \item $\partial_1^j P(r_1, r_2) = 0$ para $0 \le j < c(\beta, s)m$.
+        \item $|P| \le C(\beta, s)^m$.
+        \item $\deg P \le C(\beta, s)m$.
+    \end{itemize}
+
+    Por outro lado, a Proposição \ref{prop:lower_bound} nos garante que
+
+    \[|P| \ge min\left(\frac{q_1^{(c(\beta, s)m-1)/2}}{2\cdot C(\beta, s)m}, q_2 \right)\]
+
+    Deve, portanto, existir uma constante $c_1(\beta, s)$ tal que
+
+    \[|P| \ge \frac{q_1^{c_0(\beta,s)m}}{m}\]
+
+    Comparando os dois limites, temos
+
+    \[ \frac{q_1^{c_0(\beta,s)m}}{m} \le |P| \le C(\beta, s)^m \implies \frac{q_1^{c_0(\beta,s)m}}{m} \le C(\beta, s)^m \]
+
+    Portanto, deve existir uma constante $C_0(\beta, s, m)$ independente de $q_1$ tal que
+
+    \[q_1 \leq C_0(\beta, s, m)\]
+
+    Ora, mas $q_1$ pode ser tomado tão grande quanto se queira, não podendo, portanto, ser limitado. Por contradição, a inequação deve possuir uma quantidade finita de soluções.
+\end{dem}
+
+O Teorema de Thue, apesar de parecer insignificante perto do resultado obtido por Roth (de que a medida de irracionalidade de todos os números algébricos é igual a 2) representou um avanço significativo em pelo menos dois sentidos: por um lado, cortou pela metade a distância entre o limite superior obtido pelo Teorema de Liouville (\ref{thm:liouville}, que implica que a medida de irracionalidade de um algébrico é menor ou igual a seu grau) e a verdadeira medida de irracionalidade; por outro, estabeleceu a ideia geral que seria usada por Siegel, Dyson e Roth para melhorar as estimativas — usando o que chamamos hoje do método de polinômios auxiliares.  
+
+\subsection{Os Teoremas de Siegel, Dyson e Roth}
+
+Com a finalidade de melhorar o limite superior para a medida de irracionalidade estabelecido por Thue, Carl Ludwig Siegel usa um método semelhante ao que mostramos na subseção anterior para demonstrar o seguinte teorema:
+
+\begin{theorem}[Teorema de Siegel]
+\label{thm:siegel}
+    Seja $\alpha$ um número algébrico de grau $n \ge 3$. Se $\mu$ é um número real positivo tal que
+    
+    \[\left|\alpha - \frac{p}{q} \right| < \frac{1}{q^\mu}\]
+    %
+    possui infinitas soluções, então
+
+    \[\mu \le \frac{n}{s+1}+s\]
+    %
+    onde $s = 1, 2,...,n-1$.
+\end{theorem}
+
+É fácil provar que isso implica diretamente que $\mu_\mathcal{L} (\alpha) \le 2\sqrt{n}$. A maior diferença na demonstração de Siegel é a classe de polinômios utilizada: enquanto o Teorema de Thue utiliza polinômios específicos de duas variáveis, o Teorema de Siegel utiliza polinômios gerais de duas variáveis, i.e., da forma 
+
+\[P(x, y) = \sum_{i=0}^a \sum_{j=0}^b c_{ij} x^i y^j\]
+
+Em 1947, Freeman John Dyson usa a ideia da demonstração feita por Siegel, mas de maneira mais sofisticada (introduzindo uma série de notações novas e analisando as matrizes wronskianas dos polinômios), e consegue provar o seguinte teorema:
+
+\begin{theorem}[Teorema de Dyson]
+\label{thm:dyson}
+    Seja $\alpha$ um número algébrico de grau $n \ge 3$. Se $\mu$ é um número real positivo tal que
+    
+    \[\left|\alpha - \frac{p}{q} \right| < \frac{1}{q^\mu}\]
+    %
+    possui infinitas soluções, então
+
+    \[\mu \le \sqrt{2n}.\]
+\end{theorem}
+
+É curioso notar que o limite superior estabelecido por Dyson é justamente a média geométrica entre o grau do algébrico dado e sua verdadeira medida de irracionalidade (2), enquanto o limite superior estabelecido por Thue é a média aritmética. Podemos notar, portanto, uma diminuição rápida para o limite superior: o Teorema de Liouville foi provado em 1844; o de Thue, em 1909; e, o de Dyson, em 1947. Por fim, em 1955, Klaus Friedrich Roth prova o seguinte teorema, dando fim à discussão: 
+
+\begin{theorem}[Teorema de Roth]
+\label{thm:roth}
+    Seja $\alpha$ um número algébrico de grau $n \ge 3$. Se $\mu$ é um número real positivo tal que
+    
+    \[\left|\alpha - \frac{p}{q} \right| < \frac{1}{q^\mu}\]
+    %
+    possui infinitas soluções, então
+
+    \[\mu \le 2.\]
+\end{theorem}
+
+A demonstração do teorema de Roth também segue as ideias dos teoremas anteriores: garantira a existência um polinômio que anula um algébrico $\alpha$ e mostrar que, se houvessem infinitas soluções para a equação, este polinômio se anula "demais", levando a um limite inferior menor do que o superior. Todavia, a principal diferença dessa demonstração é o número de variáveis: enquanto nos demais teoremas analisamos polinômios de no máximo 2 variáveis, agora analisamos polinômios de $n$ variáveis, o que dificulta significativamente o trabalho. Todavia, o ganho também é imenso: a medida de irracionalidade de números algébricos passa a ser constante, limitando portanto a "qualidade"das aproximações de qualquer número algébrico. Em razão dos avanços estabelecidos com suas demonstrações, o Teorema de Roth costuma carregar também os nomes de Thue e Siegel, e, em alguns textos, também carrega o nome de Dyson. 
+
+\subsection{Aplicações do Teorema de Thue-Siegel-Dyson-Roth}
+
+Uma aplicação particular do Teorema de Thue diz respeito às chamadas equações de Thue:
+
+\begin{theorem}
+\label{thm:thue_equation}
+    Seja $m$ um inteiro diferente de zero. Então, a equação
+
+    \[f(x, y) = a_0x^n + a_1x^{n-1}y+\dots+ a_ny^n = m,\]
+    %
+    em que $n\ge 3$ e $f(x, y)$ é um polinômio irredutível de coeficientes inteiros, possui apenas um número finito de soluções inteiras. 
+\end{theorem}
+
+\begin{dem}
+    Note que, se $y = 0$, a equação se torna $a_0x^n = m$, que possui no máximo duas soluções inteiras. Suponhamos, sem perda de generalidade, que $y > 0$. Considere 
+
+    \[\frac{f(x,y)}{y^n} = a_o\left( \frac{x}{y}\right)^n + a_1\left( \frac{x}{y}\right)^{n-1} + \dots + a_n = \frac{m}{y^n}\]
+    %
+    Definindo $z = x/y$, o polinômio anterior se torna $f(z, 1)$. Pelo Teorema Fundamental da Álgebra, podemos fatorar $f(z, 1)$ como
+
+    \[f(z, 1) = a_0(z - \alpha_1)\dots(z-\alpha_n)\]
+    %
+    em que $\alpha_1,..., \alpha_n$ são as raízes de $f(z, 1)$. Portanto, 
+
+    \[f(x, y) = y^n \cdot f(z, 1) = a_0(x-\alpha_1y)\dots(x-\alpha_ny)\]
+    %
+    e podemos reescrever a equação original como
+
+    \[\left| a_0 \prod_{i = 0}^n (x - \alpha_iy)\right| = |m|\]
+    %
+    então, para pelo menos algum $i$, temos que existe $B_1$ tal que
+
+    \[|x - \alpha_1y| \le |m/a_0|^{1/n} = B_1\]
+    %
+    pois, se todos fossem maiores, o produto seria maior. Sem perda de generalidade, tomaremos este \enquote{$i$} como sendo 1. Então, para $i \ne 1$, 
+
+    \[|x - \alpha_iy| = |x - \alpha_1y + (\alpha_1 - \alpha_i)y| \ge |\alpha_1 - \alpha_i|y - |x - \alpha_1 y| \]
+    %
+    Definindo $B_2$ como 
+    
+    \[\min_{i = 2, \dots, n}|\alpha_1 - \alpha_i|,\]
+    %
+    temos: 
+
+    \[|x - \alpha_i y| \ge B_2 y - B_1 \ge \frac{B_2 y}{y}, \quad \forall \quad  y > \frac{2B_1}{b_2}\]
+
+    Logo, 
+
+    \[\left|a_0 (x-\alpha_1y)\left(\frac{B_2y}{2}\right)^{n-1}\right| < |m|\]
+    %
+    ou seja, temos que 
+
+    \[\left|\frac{x}{y} - \alpha_1\right| < \frac{1}{y^n}\left|\frac{m}{a_0}\right| \left( \frac{2}{B_2}\right)^{n-1} \le \frac{1}{y^{n - 1/4}}, \quad \forall \quad y^{1/4} > \frac{|m|}{|a_0|}\left( \frac{2}{B_2}\right)^{n-1}\]
+
+    Ora, mas $\alpha_1$ é um algébrico de grau $n$, pois $f$ é irredutível e $\alpha_1$ é raiz de $f(z, 1)$, que também é irredutível. Ora, mas o Teorema de Thue nos garante que, como $n- 1/4 > (n+2)/2$, a inequação 
+
+    \[\left| \frac{x}{y} - \alpha_1 \right| = \left| \alpha_1 - \frac{x}{y} \right| \le \frac{1}{y^{n - 1/4}}\]
+    %
+    só pode ter uma quantidade finita de soluções.
+\end{dem}
+
+A próxima aplicação considera uma classe específica de funções: definindo $f_r$, com $r \in \mathbb{R}, \,r > 2$ como
+
+\[f_r(x) = \begin{cases}
+    \frac{1}{q^r}, \text{ se x é uma fração irredutível } \frac{p}{q} \text{ com } p \ne 0 \\
+    0, \text{ se } x = 0 \text{ ou } x \notin \mathbb{Q}
+    \end{cases}
+    \]
+%
+queremos saber em que pontos $f_r$ é contínua e em quais desses pontos é diferenciável. 
+
+\begin{proposition}
+\label{prop:continuidade_fr}
+    Para cada $r > 2$, $f_r$ é contínua no zero e em todos os irracionais, mas descontínua nos racionais não-nulos.
+\end{proposition}
+
+\begin{dem}
+Dado um racional não nulo $x = p/q$, podemos sempre encontrar uma sequência $(x_n)_{n \in \mathbb{N}}$ de irracionais que converge para $p/q$ (por exemplo, $x_n = p/q + \sqrt{2}/n$). Nesse caso, notamos que $f_r(x_n) = 0 \quad \forall \, n \in \mathbb{N}$ e portanto $\lim_{n \rightarrow \infty} f_r(x_n) =0$, mas $x_n \rightarrow x$ e $\lim_{n \rightarrow \infty} f_r(x_n) \ne f_r(x)$. Portanto, $f_r$ é descontínua em todo racional não-nulo.
+
+Tomemos agora $\alpha$ como um irracional ou igual a zero. Tome então $(y_k)_{k \in \mathbb{N}}$ como uma sequência que converge para $\alpha$. Vale que:
+
+\[f_r(y_k) = \begin{cases}
+    \frac{1}{{q_k}^r} \text{ para algum } {q_k},\text{ se } y_k \text{ é racional e diferente de zero} \\
+    0, \text{ caso contrário}
+\end{cases}\]
+
+Dessa forma, vale que, para todo $y_k$, existe $q_k$ inteiro tal que
+
+\[|\alpha - y_k| < \delta \implies |f_r(\alpha) - f_r(y_k)| \le \frac{1}{{q_k}^r}\]
+
+Ao mesmo tempo, dado $\varepsilon >0$, podemos escolher $n$ grande o suficiente para que $0 < 1/n^r < \varepsilon$. Neste caso, note que para todo $n \in \mathbb{N}$, existe $\delta > 0$ tal que, se
+
+\[\left| \alpha - \frac{p}{q} \right| < \delta,\]
+%
+então $q > n$. Para observar que isso é verdade, basta tomar 
+
+\[\delta = \frac{1}{2} \, \, \min_{p\in \mathbb{Z}, \, p \ne 0, \, q \in \mathbb{N},\,  q \le n} \left\{ \left|\alpha - \frac{p}{q}\right|\right\}\]
+%
+e, então, notar que o mínimo existe (pois o há apenas uma quantidade finita de denominadores) e que é maior que zero (uma vez que $\alpha$ é irracional ou igual a zero). Portanto, tendo escolhido $n$, podemos escolher $\delta$ de forma que
+
+\[|\alpha - y_k| < \delta \implies q_k > n\]
+
+Dessa forma, notamos que
+
+\[|\alpha - y_k| < \delta \implies |f_r(\alpha) - f_r(y_k)| \le \frac{1}{{q_k}^r} < \frac{1}{n^r} < \varepsilon,\]
+%
+concluindo a demonstração.
+\end{dem}
+
+ Agora, vamos analisar os pontos onde $f_r$ é diferenciável:
+
+\begin{proposition}
+\label{prop:diferenciabilidade_fr}
+    Seja $r >2$. Se definirmos
+    \[S = \{ \alpha \in \mathbb{R} : \alpha \notin \mathbb{Q} \text{ e } f_r \text{ não é diferenciável em } \alpha \}\]
+    e 
+    \[\mathcal{L} (x) = \{ \alpha \in \mathbb{R} : \mu_\mathcal{L}(\alpha) > x\},\]
+    %
+    então $S \subset\mathcal{L}(2)$.    
+\end{proposition}
+
+\begin{dem}
+    Queremos provar que, para todo $\alpha \in S$, $\mu_\mathcal{L}(\alpha) > 2$, i.e., que a desigualdade
+
+    \[\left| \alpha - \frac{p}{q} \right| < \frac{1}{q^r}\]
+    %
+    possui infinitas soluções se $r > 2$.
+    
+    Seja então $S_n$ o conjunto dos irracionais tais que, para todo $\delta > 0$ existe $x \in (\alpha - \delta, \alpha + \delta)$ tal que
+
+    \[ \left| \frac{f_r(x) - f_r(\alpha)}{x - \alpha}\right| = \left| \frac{f_r(x)}{x - \alpha}\right| > \frac{1}{n}.\] 
+
+    Note que $S = \bigcup_{n=1}^\infty S_n$ e que, além disso, todo ponto $x$ que satisfaz a desigualdade acima deve ser racional. Substituindo $x = p/q$, obtemos
+
+    \[ \left| \frac{1/q^r}{p/q - \alpha} \right| > \frac{1}{n} \]
+    
+    Como $q^r$ é positivo, podemos reescrever como:
+    
+    \[\frac{1}{q^r |\alpha - p/q|} > \frac{1}{n} ,\]
+    %
+    e, reorganizando os termos, obtemos
+    \begin{equation}
+    \label{eq:thue_inequality}
+         \left|\alpha - \frac{p}{q}\right| < \frac{n}{q^r}
+    \end{equation}
+    
+
+    Como podemos encontrar $x \in (\alpha - \delta, \alpha + \delta)$ para qualquer valor de $\delta$, e $\alpha$ é irracional, então há infinitas soluções racionais para \eqref{eq:thue_inequality}. Dessa forma, a proposição \ref{thm:ordem_implica_medida} nos garante que  $\mu_\mathcal{L}(\alpha) > 2$ (pois $r >2$) e, por fim, $S \subset \mathcal{L}(2)$.
+\end{dem}
+
+Essa proposição nos diz que $f_r$ é diferenciável no zero e no conjunto dos números reais cuja medida de irracionalidade é igual a 2 (ou seja, todos os algébricos de grau $n \ge 2$ e também \enquote{quase todos} os números transcendentais).
+
+É interessante notar que o conjunto dos pontos onde $f_r$ não é diferenciável tem medida nula, em decorrência da seguinte proposição:
+
+\begin{proposition}
+\label{prop:medida_L2}
+    A medida de Lebesgue de $\mathcal{L}(2)$ é igual a zero.
+\end{proposition}
+
+A demonstração dessa proposição é muito parecida com a da proposição \ref{thm:medida_zero} (na qual provamos que a medida de Lebesgue de $\mathcal{L}(\infty)$ é zero) e, por isso, não a incluiremos. O leitor interessado pode encontrá-la em \cite[p. 99]{ragognette2012}. Dessa forma, apesar de ser descontínua em todos os racionais não-nulos e não-diferenciável um conjunto de números transcendentais (pois todo número com medida de irracionalidade maior que 2 é transcendental), $f_r$ ainda é diferenciável na \enquote{maioria} dos pontos, sob a ótica da medida de Lebesgue.

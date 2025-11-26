@@ -1,0 +1,449 @@
+\section{Exemplos e Generalização}
+
+\begin{definition}
+    \label{def:fracao_continua}
+    Seja $a_0$ um inteiro, e $\{ a_n \}_{n \in \mathbb{N}}$ uma sequência (finita ou infinita) de inteiros positivos. Definimos: 
+    \begin{enumerate}
+        \item Uma fração contínua finita é uma expressão da forma 
+
+        \[a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{\dotsb + \cfrac{1}{a_n}}}}\]
+        %
+    que denotamos por $[a_0; a_1, a_2, \dots, a_n]$. Os termos $a_i$ são chamados de denominadores parciais, e essa expressão é (evidentemente) um número racional. 
+
+    \item Uma fração contínua infinita, denotada por $[a_0; a_1, a_2, \dots]$, é definida como o limite de suas aproximações finitas. Para cada $k \ge 0$, o número racional 
+    
+    \[ c_k = [a_0; a_1, a_2, \dots, a_k] \]
+    %
+    é chamado de $k$-ésimo convergente da fração. O valor da fração contínua infinita, portanto, é definido como 
+    
+    \[ [a_0; a_1, a_2, \dots] := \lim_{k \to \infty} c_k \]
+    \end{enumerate}
+\end{definition}
+
+Dado um irracional $\alpha$, existe um algoritmo para calcular seus denominadores parciais: definimos $\alpha_0 = \alpha$. Então, definimos a sequência $\{ \alpha_n\}_{n \in \mathbb{N}}$ indutivamente:
+
+\[\alpha_{n+1} = \frac{1}{\alpha_n - a_n},\]
+%
+em que $a_n = \lfloor\alpha_n\rfloor$. 
+
+\begin{theorem}
+    \label{thm:fracao_converge}
+    A sequência dos convergentes $p_n/q_n$ obtida pelo algoritmo acima converge para $\alpha$. Ademais, vale:
+
+    \[\frac{1}{2q_{n+1}} < \frac{1}{q_{n+1}+q_n} < |q_n\alpha - p_n| < \frac{1}{q_{n+1}},\]
+    %
+    o que implica 
+    \[\frac{1}{2q_{n+1}q_n} <  \left|\alpha - \frac{p_n}{q_n} \right| < \frac{1}{q_{n+1}q_n}\]
+\end{theorem}
+
+A demonstração desse teorema foge do escopo deste trabalho, mas pode ser encontrada em \cite[p. 7-8]{lang1995}. 
+
+\begin{definition}
+\label{def:melhor_aprox}
+    Dizemos que $a/b$ aproxima $\alpha$ melhor que $c/d$ se vale
+
+    \[ \left| \alpha - \frac{a}{b} \right| < \left| \alpha - \frac{c}{d} \right| \]
+
+    Se $a/b$ é o racional que melhor aproxima $\alpha$ com denominador menor ou igual a $b$, dizemos que $a/b$ é uma melhor aproximação de $\alpha$. Note que isso é equivalente a dizer que 
+
+    \[ |b\alpha - a| < |d\alpha - c| \quad \forall d < b \].
+\end{definition}
+
+É possível provar que os convergentes $p_n/q_n$ da expansão em frações contínuas de um número real $\alpha$ são precisamente suas melhores aproximações (e que, portanto, a expansão em frações contínuas é única). Mais que isso, é possível provar que $p_n/q_n$ é o racional com menor denominador que satisfaz  $|\alpha q_n - p_n| < |\alpha q_{n-1} - p_{n-1}|$. A demonstração deste fato também está contida em \cite[p. 9-10]{lang1995}. 
+
+A expansão em frações contínuas está intimamente conectada com a medida de irracionalidade de Liouville-Roth. Essa conexão começa a ser evidenciada com o seguinte lema, que é corolário do fato enunciado acima:
+
+\begin{lemma}
+\label{lem:desig_frac_cont}
+    Seja $\alpha$ um número real. Se $p, q$ satisfazem a desigualdade 
+
+    \[\left|\alpha - \frac{p}{q} \right| < \frac{1}{2q^2},\]
+    %
+    Então o racional $p/q$ é um convergente da expansão em frações contínuas de $\alpha$.
+    
+\end{lemma}
+
+\begin{dem}
+    Suponha que temos $p/q$ que satisfaz:
+
+    \[ \left|\alpha - \frac{p}{q}\right| < \frac{1}{2q^2} \].
+    
+    Logo,
+
+    \begin{equation}
+        \label{eq:desig_hipotese}
+        |q\alpha - p| < \frac{1}{2q}
+    \end{equation}
+
+    Tome $a/b$ que aproxima melhor $\alpha$:
+
+    \[\left|\alpha - \frac{a}{b}\right| < \left|\alpha - \frac{p}{q}\right|\]
+
+    Temos 2 casos: $b > q$ ou $b \le q$. Se $b > q$, demonstramos o que queríamos. Se $b \le q$, então:
+
+    \[|b\alpha -a| = \left|\alpha - \frac{a}{b}\right| \cdot b < \left|\alpha - \frac{p}{q}\right| \cdot b \le \left|\alpha - \frac{p}{q}\right| \cdot q = |q\alpha - p| \]
+
+    Logo:
+
+    \[ |b\alpha - a| < |q\alpha - p| \implies |b\alpha - a| < \frac{1}{2q} \]. 
+
+    O que implica:
+
+    \begin{equation}
+        \label{eq:desig_consequencia}
+        \left|\alpha - \frac{a}{b}\right| < \frac{1}{2bq}
+    \end{equation}
+
+    Note que:
+    \[\frac{1}{qb} \le \left|\frac{a}{b} - \frac{p}{q}\right| \le \left|\alpha - \frac{a}{b}\right| + \left|\alpha - \frac{p}{q}\right|\]
+
+    Portanto, substituindo \eqref{eq:desig_hipotese} e \eqref{eq:desig_consequencia} na desigualdade de $|\frac{a}{b} - \frac{p}{q}|$:
+
+    \[\frac{1}{qb} < \frac{1}{2bq} + \frac{1}{2q^2} = \frac{q+b}{2q^2b}\]
+
+    E, concluindo,
+
+    \[ 1 < \frac{q+b}{2q} \implies b > q\]
+\end{dem}
+
+Para números irracionais cujos denominadores parciais possuem uma fórmula conhecida, é possível usar uma fórmula para calcular sua medida de irracionalidade:
+
+\begin{theorem}
+    \label{thm:formula_medida}
+    Seja $\alpha = [a_0; a_1, a_2, ...]$ um irracional cujos convergentes são $p_n/q_n$. Então
+
+    \[\mu_\mathcal{L}(\alpha) = 1+ \limsup_{n \rightarrow \infty} \frac{\ln(q_{n+1})}{\ln(q_n)} = 2 + \limsup_{n \rightarrow \infty} \frac{\ln(a_{n+1})}{\ln(q_n)} \]
+\end{theorem}
+
+\begin{dem}
+    Primeiro, demonstraremos que qualquer sequência de racionais $\{p_k/q_k\}_{k \in \mathbb{N}}$ cujas aproximações são \enquote{boas} o suficiente para influenciar o valor de $\mu_\mathcal{L}(\alpha)$ (i.e., que aproxime $\alpha$ por ordem $> 2$) possui necessariamente uma subsequência cujos termos são os convergentes de $\alpha$. Como consequência disso, a maior ordem pela qual $\alpha$ pode ser aproximado por seus convergentes é também a maior ordem pela qual pode ser aproximado por racionais.  
+    
+    Seja $\{p_k/q_k\}_{k \in \mathbb{N}}$ uma sequência que aproxima $\alpha$ por ordem $\nu > 2$. Então, quando $k \rightarrow \infty$, vale que $q_k \rightarrow \infty$. Mas, como $\nu > 2$, isso significa que para todo $a \in \mathbb{N}$ existe $k_a$ tal que para todo $k'\ge k_a$,
+
+    \[{q_{k'}}^\nu > a{q_{k'}}^2 \implies \frac{1}{{q_{k'}}^\nu} < \frac{1}{a{q_{k'}}^2}\]
+
+    Em particular, para $a = 2$, 
+
+    \[\frac{1}{{q_{k'}}^\nu} < \frac{1}{2{q_{k'}}^2}.\]
+
+    Nesse caso, note que a sequência \[\{p_k/q_k\}_{k \ge k_2}\] será composta exclusivamente por convergentes de $\alpha$ pelo lema \ref{lem:desig_frac_cont}, e podemos restringir nossa \enquote{procura} para calcular a medida de irracionalidade exclusivamente à sequência de convergentes.  
+    
+    Definimos, então, como $\lambda_n$ o número real que, para cada convergente $p_n/q_n$ satisfaz
+
+    \[\left| \alpha - \frac{p_n}{q_n}\right| = \frac{1}{{q_n}^{\lambda_n}}.\]
+    
+    Pela definição, $\mu_\mathcal{L}(\alpha)$ é o supremo do conjunto de números reais $\mu$ tais que a desigualdade $|\alpha - p/q| < q^{-\mu}$ admite infinitas soluções racionais $p/q$. Como mostramos que para $\mu > 2$ basta considerar os convergentes, buscamos o supremo dos valores $\rho$ tais que 
+    
+    \[ \left|\alpha - \frac{p_n}{q_n}\right| < q_n^{-\rho} \]
+    
+    para infinitos $n$. Substituindo $|\alpha - p_n/q_n| = q_n^{-\lambda_n}$, a desigualdade equivale a $q_n^{-\lambda_n} < q_n^{-\rho}$, o que implica $\lambda_n > \rho$.
+    Assim, 
+    
+    \[ \mu_\mathcal{L}(\alpha) = \sup \{ \rho \in \mathbb{R} : \lambda_n > \rho \text{ para infinitos } n \} \]
+    
+    Esta é precisamente a definição de limite superior da sequência $(\lambda_n)$. Logo:
+
+    \[\mu_\mathcal{L}(\alpha) = \limsup_{n \rightarrow \infty} \lambda_n.\]
+    
+    Para chegar na fórmula dada, aplicamos o Teorema \ref{thm:fracao_converge} para notar que 
+
+    \[\frac{1}{2{q_{n+1}}q_n} <\frac{1}{{q_n}^{\lambda_n}} < \frac{1}{{q_{n+1}}q_n} \implies 2q_{n+1} q_n > {q_n}^{\lambda_n} > q_{n+1} q_n \]
+
+    Aplicando o logaritmo, obtemos 
+
+    \[\ln(2q_{n+1} q_n) > \ln({q_n}^{\lambda_n}) > \ln(q_{n+1} q_n) \implies \frac{\ln(2q_{n+1} q_n)}{\ln(q_n)} > \lambda_n > \frac{\ln(q_{n+1} q_n)}{\ln(q_n)} \implies \]
+    \[ \implies 1 + \frac{\ln(q_{n+1})}{\ln(q_n)} < \lambda_n < \frac{\ln(2)}{\ln(q_n)} + 1 + \frac{\ln(q_{n+1})}{\ln(q_n)}\]
+
+    Tomando o limite superior, obtemos:
+
+    \[ \limsup_{n\to\infty} \left(1 + \frac{\ln(q_{n+1})}{\ln(q_n)}\right) \le \limsup_{n\to\infty} \lambda_n \le \limsup_{n\to\infty} \left(\frac{\ln(2)}{\ln(q_n)} + 1 + \frac{\ln(q_{n+1})}{\ln(q_n)}\right) \]
+
+    Como $q_n \rightarrow \infty$, os limites superiores nas extremidades são iguais. Portanto, temos 
+
+    \begin{equation}
+    \label{eq:formula_medida}
+    \mu_\mathcal{L}(\alpha) = 1 + \limsup_{n\to\infty} \frac{\ln(q_{n+1})}{\ln(q_n)} 
+    \end{equation}
+
+    Para a segunda fórmula, utilizamos a seguinte relação de recorrência, demonstrada em \cite[p. 2]{lang1995}:
+    \begin{equation}
+    \label{eq:recorrencia_convergentes}
+    q_{n+1} = a_{n+1}q_n + q_{n-1}
+    \end{equation}
+    
+    Como $0 \le q_{n-1} < q_n$, temos as seguintes desigualdades:
+    
+    \[ a_{n+1}q_n < q_{n+1} \le a_{n+1}q_n + q_n = (a_{n+1} + 1)q_n \]
+    
+    Tomando o logaritmo em toda a desigualdade:
+    
+    \[ \ln(a_{n+1}) + \ln(q_n) < \ln(q_{n+1}) \le \ln(a_{n+1} + 1) + \ln(q_n) \]
+    
+    Dividindo por $\ln(q_n)$ (que é positivo para $n$ suficientemente grande):
+    
+    \[ \frac{\ln(a_{n+1})}{\ln(q_n)} + 1 < \frac{\ln(q_{n+1})}{\ln(q_n)} \le \frac{\ln(a_{n+1} + 1)}{\ln(q_n)} + 1 \]
+    
+    Note que $\ln(a_{n+1} + 1) = \ln(a_{n+1}(1 + \frac{1}{a_{n+1}})) = \ln(a_{n+1}) + \ln(1 + \frac{1}{a_{n+1}})$. Como $a_{n+1} \ge 1$, temos $0 < \ln(1 + \frac{1}{a_{n+1}}) \le \ln(2)$. Assim:
+    
+    \[ \frac{\ln(a_{n+1})}{\ln(q_n)} + 1 < \frac{\ln(q_{n+1})}{\ln(q_n)} \le \frac{\ln(a_{n+1})}{\ln(q_n)} + \frac{\ln(2)}{\ln(q_n)} + 1 \]
+    
+    Tomando o limite superior quando $n \to \infty$, e observando que $\frac{\ln(2)}{\ln(q_n)} \to 0$, obtemos:
+    
+    \[ 1 + \limsup_{n \to \infty} \frac{\ln(a_{n+1})}{\ln(q_n)} \le \limsup_{n \to \infty} \frac{\ln(q_{n+1})}{\ln(q_n)} \le 1 + \limsup_{n \to \infty} \frac{\ln(a_{n+1})}{\ln(q_n)} \]
+    Logo, pela equação \eqref{eq:formula_medida}, concluímos:
+    
+    \begin{equation}
+    \label{eq:formula_medida_2}
+    \mu_\mathcal{L}(\alpha) = 1 + \left(1+ \limsup_{n \to \infty} \frac{\ln(a_{n+1})}{\ln(q_n)}\right) = 2 + \limsup_{n \to \infty} \frac{\ln(a_{n+1})}{\ln(q_n)}
+    \end{equation}
+    
+\end{dem}
+
+Com a fórmula estabelecida, podemos aplicá-la para calcular a medida de irracionalidade de números cujas expansões em frações contínuas seguem padrões conhecidos. O exemplo mais notável é o número de Euler $e$, para o qual a regularidade dos denominadores parciais permite um cálculo direto.
+
+\begin{theorem}
+    \label{thm:medida_e}
+    A medida de irracionalidade do número de Euler $e$ é igual a 2.
+\end{theorem}
+
+\begin{dem}
+    Para demonstrar este resultado, utilizaremos a fórmula estabelecida no Teorema \ref{thm:formula_medida}:
+
+    \[ \mu_\mathcal{L}(e) = 2 + \limsup_{n \to \infty} \frac{\ln(a_{n+1})}{\ln(q_n)} \]
+
+    A expansão em frações contínuas simples para o número de Euler $e$ segue um padrão regular bem conhecido, cuja demonstração pode ser encontrada em \cite{cohn2006}:
+
+    \[ e = [2; 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, \dots, 1, 1, 2k, \dots] \]
+
+    Para índices $m \ge 1$, os denominadores parciais $a_m$ seguem a estrutura: $a_m = 2k$ se $m = 3k-1$, e $a_m = 1$ caso contrário.
+    
+    Note que a subsequência de $\{a_n\}$ com os maiores valores ocorre quando $n+1 \equiv 2 \, (\text{mod } 3 )$, bastando então considerá-la para o limite superior. Se $n+1 = 3k-1$, então $k = (n+2)/3$, e o denominador parcial é $a_{n+1} = 2(n+2)/3 < n + 2$. Para todos os outros casos, $a_{n+1} = 1$. Portanto, para todo $n \ge 1$, temos a estimativa:
+    
+    \[ 1 \le a_{n+1} < n+2 \]
+
+    Tomando o logaritmo, obtemos $0 \le \ln(a_{n+1}) < \ln(n+2)$, o que indica que o numerador da fórmula do limite cresce logaritmicamente em relação a $n$.
+    
+    Por outro lado, os denominadores dos convergentes $q_n$ são definidos pela relação de recorrência \eqref{eq:recorrencia_convergentes}: $q_n = a_n q_{n-1} + q_{n-2}$, com $q_0 = 1$ e $q_1 = a_1$. Como $a_n \ge 1$ para todo $n$, os denominadores crescem pelo menos tão rápido quanto a sequência de Fibonacci $(F_n)$. Usando a aproximação de forma fechada para os números de Fibonacci, sabemos que $F_n \approx \phi^n / \sqrt{5}$, onde $\phi$ é a proporção áurea. Assim, $q_n$ cresce exponencialmente. Tomando o logaritmo natural, obtemos uma estimativa linear: $\ln(q_n) \ge \ln(F_{n+1}) \approx n \ln(\phi)$. Portanto, existe uma constante $C > 0$ tal que, para $n$ suficientemente grande, $\ln(q_n) > C \cdot n$.
+    
+
+    Substituindo essas estimativas no termo dentro do limite superior:
+
+    \[ 0 \le \frac{\ln(a_{n+1})}{\ln(q_n)} < \frac{\ln(n+2)}{C \cdot n} \]
+
+    Calculando o limite quando $n \to \infty$ (notando que, se o limite existe, é igual ao limite superior), e observando que o crescimento logarítmico é mais lento que o linear, temos:
+
+    \[ \lim_{n \to \infty} \frac{\ln(n+2)}{C \cdot n} = 0 \]
+
+    Concluímos que $\limsup_{n \to \infty} \frac{\ln(a_{n+1})}{\ln(q_n)} = 0$. Aplicando este resultado à fórmula original, obtemos:
+
+    \[ \mu_\mathcal{L}(e) = 2 + 0 = 2 \]
+\end{dem}
+
+Uma demonstração semelhante também garante que $\mu_\mathcal{L}(\tan(1)) = 2$, pois sua expansão em frações contínuas é $[1; 1, 1, 3,1,5,1,7,1,\dots]$, na qual o crescimento linear dos denominadores parciais $a_n$ também será dominado pelo crescimento exponencial dos numeradores dos convergentes $q_n$. Mais que isso, é possível provar que o mesmo vale para qualquer número real da forma $\tan(1/k)$, para $k \in \mathbb{N}$ (a demonstração deste fato pode ser encontrada em \cite[p. 212]{walters1968}).
+
+Apesar de a medida de irracionalidade de Liouville-Roth fornecer uma classificação importante para os números reais, distinguindo algébricos de alguns transcendentais (como os números de Liouville), ela pode ser insuficiente para distinguir a \enquote{qualidade} da aproximação entre números que possuem a mesma medida. Por exemplo, sabemos que quase todos os números reais possuem medida de irracionalidade igual a 2. Isso motiva a seguinte definição, encontrada em \cite{sondow2004}.
+
+\begin{definition}
+    \label{def:medida_irracionalidade_generalizada}
+    Uma medida de irracionalidade generalizada é uma função $f(x, \lambda)$, definida para $x \ge 1$ e $\lambda > 0$, que assume valores nos reais positivos e é estritamente decrescente tanto em $x$ quanto em $\lambda$ (isto é, para todo $\lambda$ fixo, $x_1 < x_2 \implies f(x_1, \lambda) > f(x_2, \lambda)$, e para todo $x$ fixo, $\lambda_1 < \lambda_2 \implies f(x, \lambda_1) > f(x, \lambda_2)$). Se existe $\lambda > 0$ com a propriedade de que, para qualquer $\varepsilon > 0$, existe um inteiro positivo $q(\varepsilon)$ tal que
+    
+    \[ \left|\alpha - \frac{p}{q}\right| > f(q, \lambda + \varepsilon), \quad \text{para todos os inteiros } p, q, \text{ com } q \ge q(\varepsilon), \]
+    
+    então denotamos por $\lambda(\alpha)$ o menor tal $\lambda$, e dizemos que $\alpha$ tem medida de irracionalidade $f(x, \lambda(\alpha))$. Caso contrário, se tal $\lambda$ não existir, escrevemos $\lambda(\alpha) = \infty$.
+\end{definition}
+
+Se tomarmos $f(x, \lambda) = x^{-\lambda}$, obtemos a medida de irracionalidade de Liouville-Roth. Um outro exemplo é a chamada base de irracionalidade, que consegue distinguir alguns números de Liouville:
+
+\begin{definition}
+    \label{def:base_irracionalidade}
+    A base de irracionalidade de um número real $\alpha$, denotada por $\mu_\mathcal{B}(\alpha)$, é definida como o menor número real $\beta \ge 1$ tal que, para todo $\varepsilon > 0$, existe um $q(\varepsilon)$ tal que a desigualdade
+    
+    \begin{equation}
+    \label{eq:base_irracionalidade} 
+    \left| \alpha - \frac{p}{q} \right| > \frac{1}{(\beta + \varepsilon)^q}
+    \end{equation}
+    
+    vale para todos os inteiros $p, q$ com $q \ge q(\varepsilon)$. Isso corresponde a tomar a medida de irracionalidade generalizada com a função $f(x, \lambda) = \lambda^{-x}$.
+
+    Caso não exista tal $\beta$ (ou seja, se a desigualdade falhar para $\beta$ arbitrariamente grande), definimos $\mu_\mathcal{B}(\alpha) = \infty$ e dizemos que $\alpha$ é um número super Liouville.
+    
+    Alternativamente, podemos defini-la de maneira análoga ao expoente de irracionalidade:
+    
+    \[ \mu_\mathcal{B}(\alpha) = \sup \left\{ \beta \in \mathbb{R} : \left| \alpha - \frac{p}{q} \right| < \frac{1}{\beta^q} \text{ admite infinitas soluções} \right\} \]
+\end{definition}
+
+\begin{proposition}
+\label{prop:equivalencia_base_irracionalidade}
+    As duas definições de base de irracionalidade são equivalentes.
+\end{proposition}
+
+\begin{proof}
+    Seja $\mu_1$ o valor de $\mu_\mathcal{B}(\alpha)$ dado pela primeira definição e $\mu_2$ o valor dado pela definição alternativa.
+
+    A primeira definição estabelece que $\mu_1$ é o menor número real $\beta \ge 1$ tal que, para todo $\varepsilon > 0$, a desigualdade
+    \[ \left| \alpha - \frac{p}{q} \right| > \frac{1}{(\beta + \varepsilon)^q} \]
+    vale para todos os inteiros $p, q$ com $q$ suficientemente grande ($q \ge q(\varepsilon)$).
+
+    Essa condição implica que, para qualquer $\varepsilon > 0$, a desigualdade inversa
+    \[ \left| \alpha - \frac{p}{q} \right| \le \frac{1}{(\beta + \varepsilon)^q} \]
+    é satisfeita por apenas um número finito de valores de $q$. Consequentemente, a desigualdade estrita
+    \[ \left| \alpha - \frac{p}{q} \right| < \frac{1}{(\beta + \varepsilon)^q} \]
+    também admite apenas um número finito de soluções.
+
+    Considere agora a segunda definição::
+    \[ \mu_2 = \sup(S), \text{ com } S = \left\{ \beta \in \mathbb{R} : \left| \alpha - \frac{p}{q} \right| < \frac{1}{\beta^q} \text{ admite infinitas soluções} \right\} \]
+
+    Primeiro, provamos que $\mu_2 \le \mu_1$.
+    Da análise da primeira definição, sabemos que para qualquer $\varepsilon > 0$, o valor $\beta = \mu_1 + \varepsilon$ resulta em apenas um número finito de soluções. Portanto, $\mu_1 + \varepsilon$ não pode pertencer ao conjunto $S$ (que exige infinitas soluções). Além disso, se algum $x > \mu_1 + \varepsilon$ estivesse em $S$, então $|\alpha - p/q| < x^{-q}$ teria infinitas soluções. Como $x^{-q} < (\mu_1 + \varepsilon)^{-q}$, isso implicaria infinitas soluções para $\mu_1 + \varepsilon$, o que é falso. Logo, todo elemento de $S$ deve ser menor ou igual a $\mu_1 + \varepsilon$. Como isso vale para todo $\varepsilon > 0$, o supremo de $S$ não pode exceder $\mu_1$. Portanto, $\mu_2 \le \mu_1$.
+
+    A seguir, provamos que $\mu_1 \le \mu_2$.
+    Devemos mostrar que $\mu_2$ satisfaz a condição exigida pela primeira definição. Seja $\varepsilon > 0$ arbitrário. Suponha, por contradição, que a condição falhe para $\mu_2$. Isso significaria que a desigualdade
+    \[ \left| \alpha - \frac{p}{q} \right| > \frac{1}{(\mu_2 + \varepsilon)^q} \]
+    não vale para todo $q$ grande. Em outras palavras, sua negação vale para infinitos $q$:
+    \[ \left| \alpha - \frac{p}{q} \right| \le \frac{1}{(\mu_2 + \varepsilon)^q} \]
+    
+    Note que para qualquer $\delta$ tal que $0 < \delta < \varepsilon$, temos $(\mu_2 + \varepsilon) > (\mu_2 + \delta)$, o que implica $(\mu_2 + \varepsilon)^{-q} < (\mu_2 + \delta)^{-q}$. Portanto, se a desigualdade acima vale infinitas vezes, então
+    \[ \left| \alpha - \frac{p}{q} \right| < \frac{1}{(\mu_2 + \delta)^q} \]
+    também admite infinitas soluções. Isso implica que $\mu_2 + \delta$ pertence ao conjunto $S$. No entanto, como $\delta > 0$, isso significa que existe um elemento em $S$ estritamente maior que $\mu_2$. Isso contradiz a definição de $\mu_2$ como o supremo de $S$. Assim, a suposição é falsa, e $\mu_2$ satisfaz a condição da primeira definição. Como $\mu_1$ é definido como o \textit{menor} número satisfazendo essa condição, devemos ter $\mu_1 \le \mu_2$.
+
+    Como $\mu_2 \le \mu_1$ e $\mu_1 \le \mu_2$, concluímos que $\mu_1 = \mu_2$.
+\end{proof}
+
+Tendo verificado a equivalência, podemos provar algumas propriedades da base de irracionalidade. A primeira é a existência de números super Liouville, que faremos através da construção de um exemplo. 
+
+\begin{proposition}
+\label{prop:exemplo_super_liouville}
+    A soma da seguinte série é um número super Liouville:
+
+    \[ S = \frac{1}{1} + \frac{1}{2^1} + \frac{1}{4^{2^1}}+... \]
+
+\end{proposition}
+
+\begin{proof}
+    Escrevemos $S = \sum_{n=1}^\infty \frac{1}{b_n}$. Como $b_{n-1}$ divide $b_n$ para todo $n > 1$, a $n$-ésima soma parcial da série pode ser escrita como $a_n/b_n$ para algum inteiro $a_n$.
+    
+    Analisando o erro da aproximação, temos:
+    \[ 0 < S - \frac{a_n}{b_n} = \sum_{k=n+1}^\infty \frac{1}{b_k} < \frac{2}{b_{n+1}} \]
+
+    Substituindo a definição de $b_{n+1}$, obtemos:
+    \[ \frac{2}{b_{n+1}} = \frac{2}{(2^{n+1})^{b_n}} \]
+    Para $n \ge 2$, temos que $2 < 2^{b_n}$, o que nos permite refinar a cota superior:
+    \[ \frac{2}{(2^{n+1})^{b_n}} < \frac{1}{(2^n)^{b_n}} \]
+    Combinando as desigualdades, obtemos para $n \ge 2$:
+    \[ \left| S - \frac{a_n}{b_n} \right| < \frac{1}{(2^n)^{b_n}} \]
+
+    Se considerarmos a definição alternativa de base de irracionalidade, estamos interessados no supremo dos valores $\beta$ tais que $|\alpha - p/q| < \beta^{-q}$ possui infinitas soluções.
+    
+    Neste caso, para qualquer $B > 0$, podemos escolher um inteiro $n$ tal que $2^n > B$. A desigualdade acima mostra que $a_n/b_n$ é uma solução para $\beta = 2^n$. Como podemos fazer isso para infinitos $n$, concluímos que o conjunto de tais $\beta$ não é limitado superiormente.
+    
+    Portanto, $\mu_\mathcal{B}(S) = \infty$, e $S$ é um número super Liouville.
+\end{proof}
+
+Com esse resultado, podemos ter a intuição de que obter uma cota superior para a base de irracionalidade é uma condição muito mais fraca (uma vez que a série que usamos para obter base infinita converge muito mais rapidamente que a que usamos para a medida de irracionalidade infinita) do que obter uma cota superior para a medida de irracionalidade de Liouville-Roth. De fato, se reescrevermos a desigualdade \eqref{eq:base_irracionalidade} como
+\[ \left| \alpha - \frac{p}{q} \right| > q^{-\frac{q}{\log q} \log (\beta+\varepsilon)}, \]
+vemos que o expoente de $q$ no lado direito é $-\frac{q}{\log q} \log (\beta+\varepsilon)$, que tende a $-\infty$ conforme $q \to \infty$. Em contraste, para uma medida de irracionalidade finita $\mu$, a cota inferior é da ordem de $q^{-\mu}$, onde o expoente é constante.
+
+Como a função $q^{-\frac{q}{\log q} C}$ decresce muito mais rapidamente do que $q^{-\mu}$ para qualquer constante $\mu$, a cota inferior imposta pela base de irracionalidade é muito menor (ou seja, mais próxima de zero). Uma cota inferior menor significa que a desigualdade é mais fácil de ser satisfeita, pois permite que as aproximações racionais $p/q$ estejam muito mais próximas de $\alpha$ sem violar a condição. Especificamente, uma base de irracionalidade finita permite aproximações exponencialmente boas (como as que ocorrem para números de Liouville), enquanto uma medida de irracionalidade finita restringe as aproximações a serem apenas polinomialmente boas.
+
+Portanto, a classe de números com base de irracionalidade finita é muito mais ampla e inclui números com medida de irracionalidade infinita (como o número super Liouville construído na Proposição \ref{prop:exemplo_super_liouville}). De fato, qualquer número com medida de irracionalidade finita $\mu$ possui automaticamente base de irracionalidade $\mu_\mathcal{B}(\alpha) = 1$:
+
+\begin{proposition}
+    \label{prop:base_irracionalidade_finita}
+    Um irracional $\alpha$ que não é de Liouville (i.e., $\mu_\mathcal{L}(\alpha) \ne \infty $) possui base de irracionalidade $\mu_\mathcal{B}(\alpha) = 1$.
+
+\end{proposition}
+
+\begin{proof}
+    Se $\mu = \mu_\mathcal{L}(\alpha)$ é finita, então para qualquer $\varepsilon > 0$ sabemos que existe $q_0$ tal que, para todo $q > q_0$:
+    \[ \left| \alpha - \frac{p}{q} \right| > \frac{1}{q^{\mu+\varepsilon}} \]
+    
+    Note que, para $q$ suficientemente grande, a função exponencial $(1+\varepsilon)^q$ cresce muito mais rapidamente que a função polinomial $q^{\mu+\varepsilon}$. Portanto, existe $q_1$ tal que para $q > q_1$:
+    \[ q^{\mu+\varepsilon} < (1+\varepsilon)^q \implies \frac{1}{q^{\mu+\varepsilon}} > \frac{1}{(1+\varepsilon)^q} \]
+    
+    Combinando as desigualdades para $q > \max(q_0, q_1)$, temos:
+    \[ \left| \alpha - \frac{p}{q} \right| > \frac{1}{(1+\varepsilon)^q} \]
+    
+    Portanto, para qualquer $\beta > 1$, podemos escolher $\varepsilon$ tal que $1+\varepsilon < \beta$, e a desigualdade $|\alpha - p/q| > \beta^{-q}$ valerá para todo $q$ suficientemente grande. Logo, $\mu_\mathcal{B}(\alpha)$ deve ser igual a 1.
+\end{proof}
+
+Também é possível encontrar uma fórmula análoga a \ref{thm:formula_medida} para a base de irracionalidade:
+
+\begin{theorem}
+    \label{thm:formula_base}
+    Seja $\alpha$ um irracional cuja expansão em frações contínuas é $[a_0; a_1, a_2, ...]$. Então:
+    \[ \ln(\mu_\mathcal{B}(\alpha)) = \limsup_{n \to \infty} \frac{\ln q_{n+1}}{q_n} = \limsup_{n \to \infty} \frac{\ln a_{n+1}}{q_n} \]
+\end{theorem}
+
+\begin{proof}
+    De maneira análoga à demonstração do Teorema \ref{thm:formula_medida}, definimos $\lambda_n$ pela equação
+    
+    \begin{equation}
+        \label{eq:def_lambda_base}
+        \left| \alpha - \frac{p_n}{q_n} \right| = \lambda_n^{-q_n}
+    \end{equation}
+
+    Pela definição alternativa de base de irracionalidade (Definição \ref{def:base_irracionalidade}), $\mu_\mathcal{B}(\alpha)$ é o supremo dos valores $\beta$ tais que a desigualdade $|\alpha - p/q| < \beta^{-q}$ admite infinitas soluções.
+    
+    Primeiramente, justificamos que basta considerar os convergentes para essa análise. Suponha que $\beta > 1$. Note que a função exponencial $\beta^q$ cresce muito mais rapidamente que a função polinomial $2q^2$. Portanto, para $q$ suficientemente grande, temos $\beta^q > 2q^2$, o que implica $\beta^{-q} < \frac{1}{2q^2}$.
+    
+    Assim, se um racional $p/q$ (com $q$ grande o suficiente) satisfaz $|\alpha - p/q| < \beta^{-q}$, ele necessariamente satisfaz:
+    \[ \left| \alpha - \frac{p}{q} \right| < \frac{1}{2q^2} \]
+    
+    Pelo Lema \ref{lem:desig_frac_cont}, isso garante que $p/q$ é um convergente da expansão em frações contínuas de $\alpha$. Logo, para calcular o supremo dos $\beta$ (que certamente será $\ge 1$ para irracionais), podemos restringir nossa busca à subsequência dos convergentes.
+
+    A desigualdade $|\alpha - p_n/q_n| < \beta^{-q_n}$ equivale a $\lambda_n^{-q_n} < \beta^{-q_n}$, o que implica $\lambda_n > \beta$. Portanto:
+
+    \[ \mu_\mathcal{B}(\alpha) = \limsup_{n \to \infty} \lambda_n \]
+
+    Utilizando as desigualdades do Teorema \ref{thm:fracao_converge}:
+
+    \[ \frac{1}{2q_n q_{n+1}} < \left| \alpha - \frac{p_n}{q_n} \right| < \frac{1}{q_n q_{n+1}} \]
+
+    Substituindo a definição de $\lambda_n$:
+
+    \[ \frac{1}{2q_n q_{n+1}} < \lambda_n^{-q_n} < \frac{1}{q_n q_{n+1}} \]
+
+    Tomando o logaritmo natural e multiplicando por $-1$ (invertendo as desigualdades):
+
+    \[ \ln(2q_n q_{n+1}) > q_n \ln \lambda_n > \ln(q_n q_{n+1}) \]
+
+    Dividindo por $q_n$:
+
+    \[ \frac{\ln 2 + \ln q_n + \ln q_{n+1}}{q_n} > \ln \lambda_n > \frac{\ln q_n + \ln q_{n+1}}{q_n} \]
+
+    Reorganizando os termos:
+
+    \[ \frac{\ln q_{n+1}}{q_n} + \frac{\ln q_n}{q_n} + \frac{\ln 2}{q_n} > \ln \lambda_n > \frac{\ln q_{n+1}}{q_n} + \frac{\ln q_n}{q_n} \]
+
+    Note que $\frac{\ln q_n}{q_n} \to 0$ (pois $q_n \rightarrow \infty$). O termo $\frac{\ln 2}{q_n}$ também tende a zero quando $n$ tende ao infinito. Portanto:
+
+    \[ \limsup_{n \to \infty} \ln \lambda_n = \limsup_{n \to \infty} \frac{\ln q_{n+1}}{q_n} \]
+
+    Como a função logaritmo é contínua e crescente, e $\lambda_n \ge 1$, vale que 
+    \[\ln(\limsup \lambda_n) = \limsup (\ln \lambda_n).\] 
+    
+    Logo:
+
+    \[ \ln(\mu_\mathcal{B}(\alpha)) = \limsup_{n \to \infty} \frac{\ln q_{n+1}}{q_n} \]
+
+    Isso prova a primeira igualdade. Para a segunda, usamos novamente a relação $q_{n+1} = a_{n+1}q_n + q_{n-1}$.
+    
+    \[ a_{n+1}q_n < q_{n+1} < (a_{n+1}+1)q_n \]
+
+    Tomando o logaritmo:
+
+    \[ \ln a_{n+1} + \ln q_n < \ln q_{n+1} < \ln(a_{n+1}+1) + \ln q_n \]
+
+    Dividindo por $q_n$:
+
+    \[ \frac{\ln a_{n+1}}{q_n} + \frac{\ln q_n}{q_n} < \frac{\ln q_{n+1}}{q_n} < \frac{\ln(a_{n+1}+1)}{q_n} + \frac{\ln q_n}{q_n} \]
+
+    Novamente, $\frac{\ln q_n}{q_n} \to 0$. Além disso, $\ln(a_{n+1}+1) - \ln a_{n+1} = \ln(1 + 1/a_{n+1}) \le \ln 2$. Portanto, a diferença entre o termo da direita e o da esquerda tende a zero. Assim:
+
+    \[ \limsup_{n \to \infty} \frac{\ln q_{n+1}}{q_n} = \limsup_{n \to \infty} \frac{\ln a_{n+1}}{q_n} \]
+
+    O que conclui a demonstração.
+\end{proof}
+
+
+
